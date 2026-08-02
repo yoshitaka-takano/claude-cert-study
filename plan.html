@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCAR-P 合格計画 | 受験 8/14 13:30</title>
+<style>
+  :root{
+    --bg:#0e1116; --panel:#161b22; --panel2:#1c232c; --line:#2a323d;
+    --tx:#e6edf3; --tx2:#9aa7b4; --tx3:#6e7d8d;
+    --ac:#c96442; --ac2:#e08a6b; --ok:#3fb950; --warn:#d29922; --bad:#f85149;
+    --b1:#4a8fd8; --b2:#8b7bd8; --b3:#3fb0a8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI",Meiryo,sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:36px 22px 80px}
+  header{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:30px}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac2);font-weight:600}
+  h1{font-size:30px;margin:8px 0 6px;letter-spacing:-.01em}
+  .sub{color:var(--tx2);font-size:14px;margin:0}
+  h2{font-size:19px;margin:38px 0 14px;padding-left:11px;border-left:3px solid var(--ac)}
+  h3{font-size:15px;margin:24px 0 8px;color:var(--tx)}
+  p{margin:8px 0}
+  .grid{display:grid;gap:12px}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:820px){.g4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.g4{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .kpi .n{font-size:25px;font-weight:650;letter-spacing:-.02em}
+  .kpi .l{font-size:11px;color:var(--tx3);text-transform:uppercase;letter-spacing:.09em;margin-top:2px}
+  .kpi .m{font-size:12px;color:var(--tx2);margin-top:5px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+  th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);
+     border-bottom:1px solid var(--line);padding:8px 10px;font-weight:600}
+  td{padding:9px 10px;border-bottom:1px solid #212832;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .bar{height:6px;border-radius:3px;background:var(--ac);display:block}
+  .barbg{background:#232b35;border-radius:3px;height:6px;width:100%;min-width:70px}
+  .tag{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:20px;
+       border:1px solid var(--line);color:var(--tx2);background:var(--panel2);white-space:nowrap}
+  .t-blue{border-color:#2c4a6b;color:#8ec1f0;background:#132131}
+  .t-purple{border-color:#463c6b;color:#b3a6f0;background:#1a1730}
+  .t-teal{border-color:#265a56;color:#79d6ce;background:#122624}
+  .t-ac{border-color:#5c3524;color:var(--ac2);background:#2a1a13}
+  .t-ok{border-color:#20502c;color:#7ee08e;background:#12240f}
+  .t-warn{border-color:#5c4a15;color:#e5c15c;background:#241e0d}
+  .day{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line);
+       border-radius:8px;padding:12px 15px;display:flex;gap:14px;align-items:flex-start}
+  .day.w1{border-left-color:var(--b1)} .day.w2{border-left-color:var(--b2)}
+  .day.w3{border-left-color:var(--b3)}
+  .day.exam{border-left-color:var(--ac);background:#1e1712}
+  .day .d{min-width:84px;font-size:12px;color:var(--tx3);font-weight:600;padding-top:2px}
+  .day .d b{display:block;color:var(--tx);font-size:14px;font-weight:650}
+  .day .c{flex:1}
+  .day .c .ttl{font-weight:600;font-size:14px;margin-bottom:3px}
+  .day .c .dsc{font-size:12.5px;color:var(--tx2)}
+  .day .c .meta{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+  ul{margin:8px 0;padding-left:20px} li{margin:5px 0;font-size:13.5px;color:var(--tx2)}
+  li b{color:var(--tx)}
+  .note{background:#1a1512;border:1px solid #4a3020;border-left:3px solid var(--warn);
+        border-radius:8px;padding:14px 16px;margin:16px 0;font-size:13.5px}
+  .note .h{font-weight:650;color:#e5c15c;margin-bottom:5px;font-size:13px}
+  .ok-note{background:#101f14;border-color:#20502c;border-left-color:var(--ok)}
+  .ok-note .h{color:#7ee08e}
+  a{color:var(--ac2)}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+         font-size:11.5px;color:var(--tx3)}
+  .chk{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--tx2);margin:7px 0}
+  .chk input{margin-top:4px;accent-color:var(--ac);width:14px;height:14px;flex:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Claude Certified Architect &ndash; Professional (CCAR-P)</div>
+  <h1>12日間・合格逆算プラン</h1>
+  <p class="sub"><b style="color:var(--ac2)">8月14日（金）13:30 PDT・枠135分</b>／Prevent Training Solutions, Riverside &nbsp;&nbsp;|&nbsp;&nbsp; 再受験は1回のみ（8/28） &nbsp;&nbsp;|&nbsp;&nbsp; 学習期間 8/3〜8/13</p>
+</header>
+
+<div class="grid g4">
+  <div class="card kpi"><div class="n">63</div><div class="l">Questions</div><div class="m">多肢選択・複数選択</div></div>
+  <div class="card kpi"><div class="n">120<span style="font-size:15px;color:var(--tx2)">分</span></div><div class="l">Exam time</div><div class="m">枠は135分（規約・調査込み）</div></div>
+  <div class="card kpi"><div class="n">720<span style="font-size:15px;color:var(--tx2)">/1000</span></div><div class="l">Passing score</div><div class="m">スケール換算・絶対評価</div></div>
+  <div class="card kpi"><div class="n">11<span style="font-size:15px;color:var(--tx2)">日</span></div><div class="l">Study days</div><div class="m">8/3〜8/13</div></div>
+</div>
+
+<div class="note">
+  <div class="h">⚠ 訂正：8月に打てる Professional は「8/14 ＋ 再受験1回」まで</div>
+  待機期間は<b>1回目の不合格後は14日、2回目の不合格後は30日</b>です。したがって 8/14 に落ちた場合の再受験は 8/28 以降の1回だけで、そこでも落ちると次は9月下旬になります。<br>
+  <b>8/28 と 8/31 は「2回分の予備」ではありません。</b>どちらか一方を再受験に使い、もう一方は当日の体調不良や会場トラブルに備えた<b>振替先</b>として空けておく、という位置づけになります。<br>
+  <b>推奨：再受験は 8/28、8/31 は振替用に温存。</b>
+</div>
+
+<div class="note ok-note">
+  <div class="h">✅ 会場を変えたことで再受験の余地が生まれました</div>
+  Riverside 会場の空き枠は <b>8/3・5・12・14・17・19・21・24・26・28・31</b>。当初「8/31 のみ」と見えたのは別会場の枠でした。<br>
+  <b>8/14 は「本気の1回目」であると同時に、最悪でも公式スコアレポートという最良の学習ガイドが手に入る日</b>になります。8/9 の模試の結果がどうであれ、この日付は動かしません。
+</div>
+
+<h2>試験ブループリント（7ドメイン）</h2>
+<table>
+  <thead><tr><th style="width:32%">ドメイン</th><th style="width:8%">配点</th><th style="width:20%"></th><th>本試験で問われる中身</th></tr></thead>
+  <tbody>
+    <tr><td><b>3. Integration</b></td><td>19%</td><td><div class="barbg"><span class="bar" style="width:100%"></span></div></td><td>API / Agent SDK / MCP、RAG構成、既存基盤への接続、認証・レート制御</td></tr>
+    <tr><td><b>1. Solution Design &amp; Architecture</b></td><td>17%</td><td><div class="barbg"><span class="bar" style="width:89%"></span></div></td><td>業務課題→アーキテクチャへの翻訳、単一/マルチエージェントの判断、コスト・レイテンシ</td></tr>
+    <tr><td><b>4. Evaluation, Testing &amp; Optimization</b></td><td>16%</td><td><div class="barbg"><span class="bar" style="width:84%"></span></div></td><td>eval設計、LLM-as-judge、回帰テスト、精度/コスト/速度の最適化</td></tr>
+    <tr><td><b>5. Governance, Safety &amp; Risk</b></td><td>14%</td><td><div class="barbg"><span class="bar" style="width:74%"></span></div></td><td>多層防御、ガードレール配置、監査証跡、規制対応、縮退設計</td></tr>
+    <tr><td><b>6. Stakeholder Comms &amp; Lifecycle</b></td><td>14%</td><td><div class="barbg"><span class="bar" style="width:74%"></span></div></td><td>ディスカバリー、トレードオフの説明、期待値管理、SLA、運用移管</td></tr>
+    <tr><td><b>2. Models, Prompting &amp; Context Eng.</b></td><td>13%</td><td><div class="barbg"><span class="bar" style="width:68%"></span></div></td><td>モデル選定、コンテキスト設計、構造化出力、プロンプトキャッシュ</td></tr>
+    <tr><td><b>7. Developer Productivity &amp; Enablement</b></td><td>7%</td><td><div class="barbg"><span class="bar" style="width:37%"></span></div></td><td>Claude Code の展開、チーム定着、運用の自走化</td></tr>
+  </tbody>
+</table>
+
+<div class="note ok-note">
+  <div class="h">診断テスト（8/2・10問）：8/10 正答</div>
+  技術系ドメイン（D2 / D3 / D4 / D5 / D7）は全問正解。誤答2問は <b>D1 と D6</b> で、同じ形をしています。<br>
+  ・不要なマルチエージェント設計の提案を「承認する」選択肢を選んだ<br>
+  ・「99%精度」というスポンサー要求を全件人手レビューで満たす選択肢を選んだ<br>
+  どちらも<b>与えられた前提を受け入れて解こうとした（Accommodate）</b>もので、CCAR-P が正解とするのは一貫して<b>前提そのものを組み替える側（Reframe）</b>です。デイリー出題に毎回1〜2問この型を混ぜて矯正します。
+</div>
+
+<h2>日次スケジュール</h2>
+
+<h3>Phase 1 &mdash; 8/3〜8/8｜公式教材733分を6日で完走</h3>
+<div class="grid" style="gap:9px">
+  <div class="day w1"><div class="d"><b>8/3</b>Mon</div><div class="c">
+    <div class="ttl">Module 1 前半 &mdash; Solution Design（約120分）</div>
+    <div class="dsc">業務課題からアーキテクチャへの翻訳。単一 vs マルチエージェントの判断基準を、Q1 で外した観点（並行性・コンテキスト分離・独立した失敗）に紐づけて整理する。</div>
+    <div class="meta"><span class="tag t-blue">D1</span><span class="tag t-warn">弱点</span></div></div></div>
+  <div class="day w1"><div class="d"><b>8/4</b>Tue</div><div class="c">
+    <div class="ttl">Module 1 後半 &mdash; モデル選定とコンテキスト設計（約118分）</div>
+    <div class="dsc">Opus/Sonnet/Haiku の使い分け、コンテキスト管理、構造化出力、プロンプトキャッシュ、extended thinking の適用判断。</div>
+    <div class="meta"><span class="tag t-blue">D2</span></div></div></div>
+  <div class="day w1"><div class="d"><b>8/5</b>Wed</div><div class="c">
+    <div class="ttl">Module 2 前半 + MCP ハンズオン（約130分）</div>
+    <div class="dsc">Agent SDK、MCP サーバ設計、ツール定義、RAG のチャンク戦略。MCP サーバを1本書いて Claude Code から呼ぶところまで。<b>最大配点ドメイン。</b></div>
+    <div class="meta"><span class="tag t-blue">D3 19%</span><span class="tag t-teal">実装</span></div></div></div>
+  <div class="day w1"><div class="d"><b>8/6</b>Thu</div><div class="c">
+    <div class="ttl">Module 2 後半 + Evaluation 導入（約130分）</div>
+    <div class="dsc">デプロイ、可観測性、レート制限とリトライ、コスト管理、フォールバック設計。あわせて eval セットの作り方に着手。</div>
+    <div class="meta"><span class="tag t-blue">D3 + D4</span></div></div></div>
+  <div class="day w1"><div class="d"><b>8/7</b>Fri</div><div class="c">
+    <div class="ttl">Module 3 &mdash; Responsible AI, Safety &amp; Risk（114分）</div>
+    <div class="dsc">安全スタックの層構造。決定論的に強制すべき制御とプロンプトに委ねてよい制御の線引き。EU AI Act / NIST AI RMF / ISO 42001 の位置づけ。</div>
+    <div class="meta"><span class="tag t-purple">D5</span></div></div></div>
+  <div class="day w1"><div class="d"><b>8/8</b>Sat</div><div class="c">
+    <div class="ttl">Module 4（178分）+ Module 5（45分）&mdash; 教材完走日</div>
+    <div class="dsc">Stakeholder Engagement / Lifecycle / GTM と Team Enablement。<b>Q9 で外した「曖昧な要求を測定可能な指標に分解し直す」型を重点的に。</b>残り時間で D4 を補強。</div>
+    <div class="meta"><span class="tag t-purple">D6 + D7</span><span class="tag t-warn">弱点</span><span class="tag t-ok">教材完了</span></div></div></div>
+</div>
+
+<h3>Phase 2 &mdash; 8/9〜8/10｜現在地の測定</h3>
+<div class="grid" style="gap:9px">
+  <div class="day exam"><div class="d"><b>8/9</b>Sun</div><div class="c">
+    <div class="ttl">🚦 フル模試 #1 &mdash; 63問 / 120分（<b>13:30 開始</b>）</div>
+    <div class="dsc">本番と同じ時刻・同じ条件（腕時計なし、メモなし、中断なし）で実施。当日中に全誤答をレビューし、ドメイン別正答率を出す。<b>目標70%</b>。ここで残り4日の時間配分が決まる。</div>
+    <div class="meta"><span class="tag t-ac">測定</span><span class="tag">120分 + 復習90分</span></div></div></div>
+  <div class="day w2"><div class="d"><b>8/10</b>Mon</div><div class="c">
+    <div class="ttl">弱点補強 ① &mdash; 模試で最下位だったドメイン</div>
+    <div class="dsc">新しい教材は増やさない。該当モジュールを見直し、誤答を「なぜその誤答が魅力的に見えたか」まで言語化する。</div>
+    <div class="meta"><span class="tag t-warn">弱点補強</span></div></div></div>
+</div>
+
+<h3>Phase 3 &mdash; 8/11〜8/14｜仕上げと本番</h3>
+<div class="grid" style="gap:9px">
+  <div class="day w2"><div class="d"><b>8/11</b>Tue</div><div class="c">
+    <div class="ttl">弱点補強 ② &mdash; 2番目に低かったドメイン</div>
+    <div class="dsc">D4 が該当する場合は、20件程度の小さな eval セットを実際に作って LLM-as-judge を人手ラベルで校正するところまでやる。</div>
+    <div class="meta"><span class="tag t-warn">弱点補強</span></div></div></div>
+  <div class="day w3"><div class="d"><b>8/12</b>Wed</div><div class="c">
+    <div class="ttl">ハーフ模試 30問 / 60分 + Reframe 型の集中演習</div>
+    <div class="dsc">目標78%。あわせて「与えられた前提を受け入れる選択肢 vs 前提を組み替える選択肢」型だけを集中的に解く。<br><b>※ 本日13:30が予約変更・取消の期限（48時間前）。</b></div>
+    <div class="meta"><span class="tag t-ac">測定</span><span class="tag t-warn">変更期限</span></div></div></div>
+  <div class="day w3"><div class="d"><b>8/13</b>Thu</div><div class="c">
+    <div class="ttl">誤答ノートの1枚化（軽め・60分）</div>
+    <div class="dsc">新規学習はしない。8/2 以降の全誤答を1枚にまとめ、当日に読む形へ。持ち物とIDを準備し、経路を確認して早く寝る。</div>
+    <div class="meta"><span class="tag">総仕上げ</span></div></div></div>
+  <div class="day exam"><div class="d"><b>8/14</b>Fri</div><div class="c">
+    <div class="ttl">🎯 受験：13:30〜（枠135分／Riverside）</div>
+    <div class="dsc"><b>午前は絶対に詰め込まない。</b>誤答ノートを30分読む程度に留め、あとは軽く過ごす。昼食は12:00までに軽めで済ませる（満腹は午後の集中を落とす）。<b>13:00 会場到着</b>を目標に出発。</div>
+    <div class="meta"><span class="tag t-ac">本番</span><span class="tag t-ok">全日休暇</span></div></div></div>
+</div>
+
+<h3>8/15 以降の分岐</h3>
+<div class="grid" style="gap:9px">
+  <div class="day w3"><div class="d"><b>合格</b></div><div class="c">
+    <div class="ttl">8/28 または 8/31 に Foundations（CCAR-F）を受験</div>
+    <div class="dsc">結果が出た 8/14 当日に予約する。追加学習は不要。デイリー出題はここで停止します。</div>
+    <div class="meta"><span class="tag t-ok">$125</span></div></div></div>
+  <div class="day w3"><div class="d"><b>不合格</b></div><div class="c">
+    <div class="ttl">8/28 に再受験（8/31 は振替用に温存）</div>
+    <div class="dsc">スコアレポートのドメイン別成績が最良の学習ガイド。<b>下位2ドメインだけ</b>に絞って 8/24〜8/27 で再学習する。全範囲をやり直さない。2回目も不合格の場合、次は30日待機で9月下旬。</div>
+    <div class="meta"><span class="tag t-warn">最後の1回</span></div></div></div>
+</div>
+
+<h2>Foundations（CCAR-F）の予約タイミング</h2>
+<div class="note">
+  <div class="h">8月分は今すぐ押さえない</div>
+  8/28 と 8/31 は <b>Professional 再受験と振替のために空けておく枠</b>です。ここに Foundations を入れると、8/14 に不合格だった場合にキャンセルと再予約の綱渡りが発生します。<br>
+  一方 Foundations には期限がありません。8月に受ける必然性がないので、<b>予約は 8/14 の結果を見てから</b>で十分です。<br><br>
+  どうしても席を確保しておきたい場合は、<b>9月の日付で予約</b>してください。48時間前までなら無料で変更できるので、8/14 に合格していれば 8/28 か 8/31 へ前倒しできます。逆方向（8月に取って9月へ後ろ倒し）より安全です。
+</div>
+
+<h2>会場受験の当日ルール（Riverside / 3850 Vine St STE 210）</h2>
+<div class="note">
+  <div class="h">⏱ 遅刻15分で受験不可・受験料没収</div>
+  規定は「15分前到着」ですが、Menifee からの所要時間と駐車を考えると <b>13:00 到着</b>を目標にしてください。15分を超える遅刻は入室拒否＋$175 没収です。
+</div>
+<table>
+  <thead><tr><th style="width:22%">項目</th><th>内容と注意点</th></tr></thead>
+  <tbody>
+    <tr><td><b>本人確認書類</b></td><td>原本・有効期限内・政府発行で、<b>氏名・顔写真・署名</b>の3点が揃っていること。コピー不可。米国内受験のため<b>米国発行のID</b>（カリフォルニア州運転免許証など）が必要で、該当するIDが無い場合のみ国籍国のパスポートが使える。<b>予約時の姓名とIDの姓名が完全一致</b>していること</td></tr>
+    <tr><td><b>生体情報</b></td><td>スポンサー設定により<b>手のひら静脈パターンを採取・保管</b>される場合がある</td></tr>
+    <tr><td><b>持ち込み</b></td><td>試験室には<b>一切の私物を持ち込めない</b>。カバン、書籍、メモ、スマートフォン、腕時計、財布はすべてロッカーへ。<b>腕時計が使えないため、時間管理は画面上のタイマーのみ</b></td></tr>
+    <tr><td><b>電子機器</b></td><td>ゼロトレランス。セルフパットダウン開始後に未申告の電子機器が見つかると<b>退場・受験料没収</b></td></tr>
+    <tr><td><b>メモ用具</b></td><td>スポンサーが許可した場合のみ。Anthropic の可否が未確認のため、<b>メモなしで63問を捌く前提</b>で準備する</td></tr>
+    <tr><td><b>変更・取消</b></td><td><b>48時間前まで＝8/12 13:30</b>。これを過ぎた変更・取消・無断欠席はすべて $175 没収</td></tr>
+  </tbody>
+</table>
+
+<h2>時間配分（63問 / 120分）</h2>
+<ul>
+  <li><b>1問あたり約1分50秒。</b>腕時計が使えないので、画面上のタイマーで「30問終了時点で残り60分」を目安にする。</li>
+  <li><b>迷ったら即フラグを立てて次へ。</b>1問に3分以上かけない。Reframe 型の設問は考え込むほど Accommodate 側に引き寄せられる。</li>
+  <li><b>見直しは最後にまとめて。</b>フラグ付き問題だけを回り、最初の直感を覆すのは明確な根拠があるときだけにする。</li>
+  <li><b>Select TWO は片方が明らかでも油断しない。</b>もう片方を惰性で選ぶのが典型的な失点パターン。</li>
+</ul>
+
+<h2>今日〜明日のチェックリスト</h2>
+<div class="card">
+  <div class="chk"><input type="checkbox"><span><b>予約時の姓名とIDの姓名が完全一致</b>しているか確認（ミドルネームの有無、順序、スペル）。不一致なら今日中に修正手続きを開始</span></div>
+  <div class="chk"><input type="checkbox"><span>使用するIDに<b>署名欄が入っているか</b>確認</span></div>
+  <div class="chk"><input type="checkbox"><span>Riverside 会場までの<b>経路・所要時間・駐車場</b>を確認し、13:00 到着で逆算した出発時刻を登録</span></div>
+  <div class="chk"><input type="checkbox"><span><b>8/14 の全日休暇</b>を申請</span></div>
+  <div class="chk"><input type="checkbox"><span>8/3〜8/8 の平日2時間ブロックをカレンダーに固定枠として入れる</span></div>
+  <div class="chk"><input type="checkbox"><span><b>8/9（日）13:30〜17:00 を模試用に確保</b>（120分の通し受験＋90分の復習）</span></div>
+  <div class="chk"><input type="checkbox"><span>Anthropic 側の受験者ポリシーで <b>休憩・メモ用ホワイトボードの可否</b>を確認</span></div>
+  <div class="chk"><input type="checkbox"><span>公式 <a href="https://anthropic-partners.skilljar.com/path/claude-certified-architect-professional">Prep Course（全5モジュール・733分）</a>にアクセスできることを確認</span></div>
+  <div class="chk"><input type="checkbox"><span>Foundations は<b>予約しない</b>（または9月の日付で予約）</span></div>
+</div>
+
+<h2>この計画の弱点</h2>
+<ul>
+  <li><b>フル模試が1回しかない。</b>11日という期間では2回目を挟む余地がないため、8/12 のハーフ模試で補っている。8/9 の結果が想定を大きく下回った場合のみ、8/12 をフル模試に切り替える。</li>
+  <li><b>D4（Evaluation, 16%）に専用の公式モジュールがない。</b>Module 2 と自主演習で埋める設計だが、ここが 8/9 の模試で最も低く出る可能性が高い。出たら 8/10〜8/11 を全振りする。</li>
+  <li><b>事務手続きで落ちる可能性は実力と無関係。</b>氏名不一致・ID要件不足・遅刻は、$175 と貴重な受験枠を一瞬で失わせる。学習と同じ優先度で今日中に潰しておく。</li>
+  <li><b>13:30 開始は昼食後の時間帯。</b>8/9 の模試を必ず同じ時刻で行い、その時間帯の自分のパフォーマンスと昼食の量を事前に検証する。</li>
+</ul>
+
+<footer>
+  出典: <a href="https://www.pearsonvue.com/us/en/anthropic.html">Pearson VUE — Anthropic Claude Certification Program</a>、
+  <a href="https://anthropic-partners.skilljar.com/path/claude-certified-architect-professional">Anthropic 公式 Prep Course</a>、
+  <a href="https://findskill.ai/blog/claude-certified-architect-professional-exam/">FindSkill.ai 試験概要</a>。<br>
+  ドメイン配点・出題数・合格点は第三者まとめによる情報。公式 Exam Guide での突き合わせを推奨。最終更新 2026-08-02。
+</footer>
+
+</div>
+</body>
+</html>
