@@ -221,6 +221,12 @@ function toggleAuto(){
   if(AUTO){ lastAuto=-1; readQ(); } else stopSpeak();
   syncBar();
 }
+function fitPad(){
+  var bar=document.querySelector(".bar"), pad=document.querySelector(".pad");
+  if(bar&&pad) pad.style.height=(bar.offsetHeight+8)+"px";
+}
+try{ window.addEventListener("resize",function(){ setTimeout(fitPad,50); });
+     window.addEventListener("orientationchange",function(){ setTimeout(fitPad,300); }); }catch(e){}
 function syncBar(){
   var b=document.getElementById("bplay"); if(b){ b.textContent=speaking?"■ 停止":"▶ 読み上げ";
     b.className="sbtn"+(speaking?" play":""); }
@@ -274,7 +280,7 @@ function vQ(){
     '<button class="btn" onclick="mv(1)"'+(ci===idx.length-1?" disabled":"")+'>次 →</button>'+
     '</div></div>';
  document.getElementById("app").innerHTML=h;
- syncBar();
+ syncBar(); fitPad();
  if(AUTO && !s && lastAuto!==gi){ lastAuto=gi; setTimeout(readQ,200); }
 }
 function pick(j){
@@ -360,6 +366,6 @@ h+='<div class="note"><b>見るべき数字は「複数選択の初回正答率�
 function setF(f){stopSpeak();filt=f;ci=0;lastAuto=-1;build();view="q";window.scrollTo(0,0);R();}
 function jump(i){stopSpeak();filt="ALL";build();ci=idx.indexOf(i);if(ci<0)ci=0;lastAuto=-1;view="q";window.scrollTo(0,0);R();}
 function rst(){if(!confirm("初回記録を含むすべての解答記録を消去します。よろしいですか？"))return;ST={};save();build();R();}
-function R(){build(); if(view==="menu") vMenu(); else vQ();}
+function R(){build(); if(view==="menu") vMenu(); else { vQ(); setTimeout(fitPad,30); } }
 build(); R();
 </script></body></html>
