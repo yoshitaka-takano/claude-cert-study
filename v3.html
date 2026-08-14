@@ -22,7 +22,20 @@ padding:12px 18px;font-size:calc(15px*var(--k));font-weight:700;cursor:pointer;f
 .bar{position:fixed;top:0;left:0;right:0;background:rgba(18,16,14,.97);
 border-bottom:1px solid var(--line);z-index:20;backdrop-filter:blur(8px)}
 .bar .in{max-width:820px;margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:10px}
-.pad{height:54px}
+.bar .in2{max-width:820px;margin:0 auto;padding:0 14px 9px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.pad{height:98px}
+.sbtn{background:var(--pn);border:1px solid var(--line);color:var(--tx);border-radius:9px;
+padding:7px 12px;font-size:calc(13px*var(--k));font-weight:700;cursor:pointer;font-family:inherit;
+white-space:nowrap}
+.sbtn.on{background:#3a2116;border-color:var(--ac);color:var(--ac)}
+.sbtn.play{background:var(--ac);border-color:var(--ac);color:#fff}
+.sbtn:disabled{opacity:.35}
+.spk{float:right;margin-left:12px;background:transparent;border:1px solid var(--line);
+color:var(--mu);border-radius:8px;padding:3px 9px;font-size:calc(12px*var(--k));cursor:pointer;
+font-family:inherit;line-height:1.3}
+.spk:hover{border-color:var(--ac);color:var(--ac)}
+.opt.now{border-color:#6b8fd6;box-shadow:inset 0 0 0 1px #6b8fd6}
+.stem.now{background:#1a2430;border-radius:9px;padding:10px 12px;margin-left:-12px;margin-right:-12px}
 .pb{height:5px;background:var(--pn2);border-radius:3px;overflow:hidden;flex:1;min-width:60px}
 .pb i{display:block;height:100%;background:var(--ac)}
 .pos{color:var(--mu);font-size:calc(13px*var(--k));white-space:nowrap}
@@ -94,6 +107,129 @@ function multi(q){return q.a.length>1;}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 var LT="ABCDE";
 function cnt(f){var n=0;for(var i=0;i<Q.length;i++){var s=ST[i];if(s&&f(s))n++;}return n;}
+
+/* ================= 読み上げ ================= */
+var SP = (typeof window!=="undefined" && window.speechSynthesis) ? window.speechSynthesis : null;
+var VEN=null, VJA=null;
+function pickVoices(){
+  if(!SP) return;
+  var vs=[]; try{ vs=SP.getVoices()||[]; }catch(e){ vs=[]; }
+  function best(re,pref){
+    var c=vs.filter(function(v){return re.test(v.lang||"");});
+    if(!c.length) return null;
+    for(var i=0;i<pref.length;i++){
+      for(var j=0;j<c.length;j++) if((c[j].name||"").indexOf(pref[i])>=0) return c[j];
+    }
+    var loc=c.filter(function(v){return v.localService;});
+    return loc.length?loc[0]:c[0];
+  }
+  VEN=best(/^en[-_]US/i,["Samantha","Google US English","Ava","Allison","Microsoft Aria"])
+      || best(/^en/i,[]);
+  VJA=best(/^ja/i,["Kyoko","Google 日本語","O-ren"]);
+}
+if(SP){ pickVoices(); try{ SP.onvoiceschanged=pickVoices; }catch(e){} }
+
+var RATE=1; try{var r=parseFloat(localStorage.getItem("ccarp_v3_rate")); if(r)RATE=r;}catch(e){}
+var AUTO=false; try{ AUTO = localStorage.getItem("ccarp_v3_auto")==="1"; }catch(e){}
+var RATES=[0.75,0.9,1,1.15,1.3];
+var speaking=false, sq=[], sqi=0, lastAuto=-1, curMark=null;
+
+function chunkText(t){
+  t=String(t).replace(/\s+/g," ").trim();
+  if(t.length<=170) return [t];
+  var parts=[], cur="";
+  for(var n=0;n<t.length;n++){
+    cur+=t.charAt(n);
+    var ch=t.charAt(n);
+    if((ch==="."||ch==="?"||ch==="!"||ch===":"||ch===";") && t.charAt(n+1)===" "){
+      parts.push(cur); cur=""; n++;
+    }
+  }
+  if(cur) parts.push(cur);
+  var out=[], buf="";
+  for(var i=0;i<parts.length;i++){
+    if((buf+" "+parts[i]).trim().length>170){ if(buf) out.push(buf.trim()); buf=parts[i]; }
+    else buf=(buf?buf+" ":"")+parts[i];
+  }
+  if(buf.trim()) out.push(buf.trim());
+  if(out.length) return out;
+  var o2=[]; for(var k=0;k<t.length;k+=170) o2.push(t.slice(k,k+170)); return o2;
+}
+function markEl(m){
+  curMark=m;
+  var st=document.getElementById("stem"); if(st) st.className="stem"+(m==="stem"?" now":"");
+  for(var j=0;j<5;j++){ var el=document.getElementById("opt"+j);
+    if(el) el.className=el.getAttribute("data-cls")+(m===("opt"+j)?" now":""); }
+}
+function speakItems(items){
+  if(!SP){ alert("このブラウザは読み上げに対応していません。"); return; }
+  stopSpeak();
+  sq=[];
+  for(var i=0;i<items.length;i++){
+    var cs=chunkText(items[i].t);
+    for(var j=0;j<cs.length;j++) sq.push({t:cs[j],lang:items[i].lang,mark:items[i].mark});
+  }
+  sqi=0; speaking=true; syncBar(); nextChunk();
+}
+function nextChunk(){
+  if(!speaking){ return; }
+  if(sqi>=sq.length){ speaking=false; markEl(null); syncBar(); return; }
+  var it=sq[sqi++];
+  markEl(it.mark||null);
+  var u=new SpeechSynthesisUtterance(it.t);
+  u.rate=RATE; u.pitch=1; u.volume=1;
+  if(it.lang==="ja"){ u.lang="ja-JP"; if(VJA) u.voice=VJA; }
+  else { u.lang="en-US"; if(VEN) u.voice=VEN; }
+  u.onend=function(){ if(speaking) setTimeout(nextChunk,60); };
+  u.onerror=function(){ if(speaking) setTimeout(nextChunk,60); };
+  try{ SP.speak(u); }catch(e){ speaking=false; syncBar(); }
+}
+function stopSpeak(){ speaking=false; sq=[]; sqi=0; markEl(null);
+  if(SP){ try{ SP.cancel(); }catch(e){} } syncBar(); }
+function toggleRead(){ if(speaking) stopSpeak(); else readQ(); }
+function readQ(){
+  var gi=idx[ci], q=Q[gi];
+  var items=[{t:q.q,lang:"en",mark:"stem"}];
+  for(var j=0;j<q.o.length;j++)
+    items.push({t:"Option "+LT[j]+". "+q.o[j], lang:"en", mark:"opt"+j});
+  speakItems(items);
+}
+function readOpts(){
+  var gi=idx[ci], q=Q[gi], items=[];
+  for(var j=0;j<q.o.length;j++)
+    items.push({t:"Option "+LT[j]+". "+q.o[j], lang:"en", mark:"opt"+j});
+  speakItems(items);
+}
+function readOne(j){
+  var gi=idx[ci], q=Q[gi];
+  speakItems([{t:"Option "+LT[j]+". "+q.o[j], lang:"en", mark:"opt"+j}]);
+}
+function readStem(){ var gi=idx[ci]; speakItems([{t:Q[gi].q,lang:"en",mark:"stem"}]); }
+function readExp(){
+  var gi=idx[ci], q=Q[gi], s=ST[gi]; if(!s) return;
+  var ans="正解は "+q.a.map(function(i){return LT[i];}).join(" と ")+" です。";
+  speakItems([{t:ans,lang:"ja"},{t:q.e,lang:"ja"},{t:q.p,lang:"ja"}]);
+}
+function cycleRate(){
+  var i=RATES.indexOf(RATE); RATE=RATES[(i+1)%RATES.length];
+  try{localStorage.setItem("ccarp_v3_rate",RATE);}catch(e){}
+  if(speaking){ var keep=sq.slice(sqi-1); stopSpeak(); sq=keep; sqi=0; speaking=true; syncBar(); nextChunk(); }
+  else syncBar();
+}
+function toggleAuto(){
+  AUTO=!AUTO; try{localStorage.setItem("ccarp_v3_auto",AUTO?"1":"0");}catch(e){}
+  if(AUTO){ lastAuto=-1; readQ(); } else stopSpeak();
+  syncBar();
+}
+function syncBar(){
+  var b=document.getElementById("bplay"); if(b){ b.textContent=speaking?"■ 停止":"▶ 読み上げ";
+    b.className="sbtn"+(speaking?" play":""); }
+  var r=document.getElementById("brate"); if(r) r.textContent="速さ "+RATE.toFixed(2).replace(/0$/,"")+"x";
+  var a=document.getElementById("bauto"); if(a) a.className="sbtn"+(AUTO?" on":"");
+}
+try{ window.addEventListener("pagehide",stopSpeak);
+     window.addEventListener("beforeunload",stopSpeak); }catch(e){}
+
 function nDone(){var n=0;for(var i=0;i<Q.length;i++)if(ST[i])n++;return n;}
 
 function vQ(){
@@ -101,16 +237,25 @@ function vQ(){
  var d=nDone(), pct=Math.round(d/Q.length*100);
  var h='<div class="bar"><div class="in"><div class="pb"><i style="width:'+pct+'%"></i></div>'+
   '<span class="pos">'+d+'/'+Q.length+'</span>'+
-  '<button class="btn g sm" onclick="view=\'menu\';R()">メニュー</button></div></div><div class="pad"></div>';
+  '<button class="btn g sm" onclick="view=\'menu\';R()">メニュー</button></div>'+
+  '<div class="in2">'+
+   '<button class="sbtn" id="bplay" onclick="toggleRead()">▶ 読み上げ</button>'+
+   '<button class="sbtn" onclick="readStem()">設問のみ</button>'+
+   '<button class="sbtn" onclick="readOpts()">選択肢のみ</button>'+
+   (s?'<button class="sbtn" onclick="readExp()">解説</button>':'')+
+   '<button class="sbtn" id="brate" onclick="cycleRate()">速さ</button>'+
+   '<button class="sbtn" id="bauto" onclick="toggleAuto()">自動</button>'+
+  '</div></div><div class="pad"></div>';
  h+='<div class="wrap"><span class="dm">'+q.d+' '+DOMS[q.d]+'</span>';
  if(s) h+='<span class="pt2">'+esc(q.pat)+'</span>';
  if(multi(q)) h+='<span class="tag">SELECT '+(q.a.length===3?"THREE":"TWO")+'</span>';
- h+='<div class="stem">'+esc(q.q)+'</div>';
+ h+='<div class="stem" id="stem">'+esc(q.q)+'</div>';
  for(var j=0;j<q.o.length;j++){
   var c="";
   if(s){ if(q.a.indexOf(j)>=0) c=" ok"; else if(sel.indexOf(j)>=0) c=" ng"; }
   else if(sel.indexOf(j)>=0) c=" sel";
-  h+='<div class="opt'+c+'"'+(s?'':' onclick="pick('+j+')"')+'>'+
+  h+='<div class="opt'+c+'" id="opt'+j+'" data-cls="opt'+c+'"'+(s?'':' onclick="pick('+j+')"')+'>'+
+     '<button class="spk" onclick="event.stopPropagation();readOne('+j+')">&#128266;</button>'+
      '<span class="L">'+LT[j]+'</span>'+esc(q.o[j])+'</div>';
  }
  if(!s && multi(q)) h+='<p class="sub">'+q.a.length+'つ選んでください（現在 '+sel.length+' つ）</p>';
@@ -129,6 +274,8 @@ function vQ(){
     '<button class="btn" onclick="mv(1)"'+(ci===idx.length-1?" disabled":"")+'>次 →</button>'+
     '</div></div>';
  document.getElementById("app").innerHTML=h;
+ syncBar();
+ if(AUTO && !s && lastAuto!==gi){ lastAuto=gi; setTimeout(readQ,200); }
 }
 function pick(j){
  var gi=idx[ci], q=Q[gi];
@@ -148,13 +295,14 @@ function pick(j){
  save(); R();
 }
 function again(gi){ delete ST[gi]; delete ST["_t"+gi]; save(); R(); }
-function mv(d){ ci=Math.min(idx.length-1,Math.max(0,ci+d)); window.scrollTo(0,0); R(); }
+function mv(d){ stopSpeak(); ci=Math.min(idx.length-1,Math.max(0,ci+d)); window.scrollTo(0,0); R(); }
 
 function vMenu(){
  var d=nDone(), ok=cnt(function(s){return s.ok;}), f=cnt(function(s){return s.first;});
  var h='<div class="wrap"><h1>CCAR-P 弱点特化 第3版 34問</h1>'+
   '<p class="sub">weak32 の結果（初回30/34相当・誤答2問がいずれも Select TWO）を受けて作成。34問中17問が複数選択（Select TWO 14／Select THREE 3）です。出題傾向のラベルは解答後まで表示しません。</p>';
- h+='<div class="note"><b>見るべき数字は「複数選択の初回正答率」です。</b>前回は単一選択が28/28、複数選択が2/4でした。ここが唯一の実測された弱点です。<br>また前回はパターン名を解答前に表示しており、罠の種類を事前に教えていました。今回は解答後にのみ表示します。</div>';
+ h+='<div class="note"><b>音声について。</b>各問の上部にある ▶ 読み上げ で設問と選択肢A〜Eを続けて読み上げます。選択肢の右端の🔊はその選択肢だけを読み直します。「自動」を入れると次の問題に進むたびに自動で読み始めます。iPhone では最初の一回だけ手で ▶ を押してください（その後は自動が有効になります）。読み上げ中に画面をタップしても解答できます。</div>';
+h+='<div class="note"><b>見るべき数字は「複数選択の初回正答率」です。</b>前回は単一選択が28/28、複数選択が2/4でした。ここが唯一の実測された弱点です。<br>また前回はパターン名を解答前に表示しており、罠の種類を事前に教えていました。今回は解答後にのみ表示します。</div>';
  h+='<div class="card"><div class="big">'+(d?Math.round(f/d*100):0)+'%</div>'+
     '<p class="sub" style="margin:0">初回正答 '+f+' / '+d+' 問（解答済 '+d+' / '+Q.length+'）<br>'+
     '現在の状態での正答 '+ok+' 問</p></div>';
@@ -209,8 +357,8 @@ function vMenu(){
  h+='<div style="margin:16px 0 40px"><button class="btn" onclick="view=\'q\';R()">問題に戻る</button></div></div>';
  document.getElementById("app").innerHTML=h;
 }
-function setF(f){filt=f;ci=0;build();view="q";window.scrollTo(0,0);R();}
-function jump(i){filt="ALL";build();ci=idx.indexOf(i);if(ci<0)ci=0;view="q";window.scrollTo(0,0);R();}
+function setF(f){stopSpeak();filt=f;ci=0;lastAuto=-1;build();view="q";window.scrollTo(0,0);R();}
+function jump(i){stopSpeak();filt="ALL";build();ci=idx.indexOf(i);if(ci<0)ci=0;lastAuto=-1;view="q";window.scrollTo(0,0);R();}
 function rst(){if(!confirm("初回記録を含むすべての解答記録を消去します。よろしいですか？"))return;ST={};save();build();R();}
 function R(){build(); if(view==="menu") vMenu(); else vQ();}
 build(); R();
