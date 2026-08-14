@@ -1,0 +1,217 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>CCAR-P 弱点特化 第3版 34問</title><style>
+:root{--bg:#12100e;--pn:#1c1917;--pn2:#231f1c;--line:#39322c;--tx:#f0ece7;--mu:#a79e94;
+--ac:#d97757;--ok:#4ea36a;--bad:#d1594f;--k:1.15}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);
+font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+line-height:1.6;padding-bottom:100px}
+.wrap{max-width:820px;margin:0 auto;padding:0 14px}
+h1{font-size:calc(23px*var(--k));margin:20px 0 6px;line-height:1.35}
+h2{font-size:calc(18px*var(--k));margin:24px 0 10px}
+p,li{font-size:calc(15px*var(--k))}
+.sub{color:var(--mu);font-size:calc(14px*var(--k));margin:0 0 14px}
+.card{background:var(--pn);border:1px solid var(--line);border-radius:13px;padding:16px;margin:12px 0}
+.btn{display:inline-block;background:var(--ac);color:#fff;border:0;border-radius:10px;
+padding:12px 18px;font-size:calc(15px*var(--k));font-weight:700;cursor:pointer;font-family:inherit}
+.btn:disabled{opacity:.35}
+.btn.g{background:transparent;border:1px solid var(--line);color:var(--tx);font-weight:600}
+.btn.sm{padding:8px 13px;font-size:calc(13px*var(--k))}
+.btn.on{background:#3a2116;border-color:var(--ac);color:var(--ac)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sp{flex:1}
+.bar{position:fixed;top:0;left:0;right:0;background:rgba(18,16,14,.97);
+border-bottom:1px solid var(--line);z-index:20;backdrop-filter:blur(8px)}
+.bar .in{max-width:820px;margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.pad{height:54px}
+.pb{height:5px;background:var(--pn2);border-radius:3px;overflow:hidden;flex:1;min-width:60px}
+.pb i{display:block;height:100%;background:var(--ac)}
+.pos{color:var(--mu);font-size:calc(13px*var(--k));white-space:nowrap}
+.dm{display:inline-block;background:var(--pn2);border:1px solid var(--line);border-radius:6px;
+padding:3px 9px;font-size:calc(12px*var(--k));color:var(--mu)}
+.pt2{display:inline-block;background:#1a2430;border:1px solid #35506b;color:#8fb6e0;
+border-radius:6px;padding:3px 9px;font-size:calc(12px*var(--k));margin-left:6px}
+.tag{display:inline-block;background:#3a2116;border:1px solid var(--ac);color:var(--ac);
+border-radius:6px;padding:3px 9px;font-size:calc(12px*var(--k));font-weight:700;margin-left:6px}
+.stem{font-size:calc(16px*var(--k));margin:13px 0 15px;line-height:1.7}
+.opt{display:block;background:var(--pn);border:1px solid var(--line);border-radius:11px;
+padding:13px 15px;margin:9px 0;cursor:pointer;font-size:calc(15px*var(--k));line-height:1.6}
+.opt.sel{border-color:var(--ac);background:#241812}
+.opt .L{font-weight:800;color:var(--mu);margin-right:8px}
+.opt.sel .L{color:var(--ac)}
+.opt.ok{border-color:var(--ok);background:#0f2213}
+.opt.ng{border-color:var(--bad);background:#25100f}
+.exp{background:var(--pn2);border-left:3px solid var(--ac);border-radius:0 9px 9px 0;
+padding:13px 15px;margin:12px 0;font-size:calc(14px*var(--k));line-height:1.75}
+.exp .pt{color:var(--ac);font-weight:700;margin-top:10px}
+.vd{font-weight:800;font-size:calc(16px*var(--k));margin:12px 0 0}
+.vd.o{color:var(--ok)} .vd.x{color:var(--bad)}
+.hist{color:var(--mu);font-size:calc(13px*var(--k));margin:6px 0 0}
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(18,16,14,.97);
+border-top:1px solid var(--line);z-index:20;backdrop-filter:blur(8px)}
+.nav .in{max-width:820px;margin:0 auto;padding:10px 14px;display:flex;gap:8px;align-items:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:7px;margin:12px 0}
+.gc{aspect-ratio:1;border-radius:9px;border:1px solid var(--line);background:var(--pn);
+display:flex;align-items:center;justify-content:center;font-weight:700;cursor:pointer;
+font-size:calc(14px*var(--k));position:relative}
+.gc.ok{background:#12301c;border-color:#2f6b45;color:#8fd6a6}
+.gc.ng{background:#2e1310;border-color:#7a332c;color:#e59a92}
+.gc.fx{box-shadow:inset 0 -4px 0 0 var(--ok)}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:calc(14px*var(--k))}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--mu);font-weight:600;font-size:calc(13px*var(--k))}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+.big{font-size:calc(38px*var(--k));font-weight:800;line-height:1.1;margin:4px 0}
+.fs button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);
+background:var(--pn);color:var(--tx);font-size:15px;font-weight:700;cursor:pointer}
+.note{background:#332b12;border:1px solid #6b5a2f;border-radius:11px;padding:13px 15px;
+margin:12px 0;font-size:calc(14px*var(--k));color:#e8d9a8;line-height:1.75}
+</style></head><body><div id="app"></div><script>
+var Q=[{"pat": "複数選択の規律", "d": "D3", "q": "Select TWO. A customer facing agent streams responses. Two problems are reported: the UI appears frozen for 10 seconds while tools run, and about 2 percent of sessions lose the connection and the user loses all generated text. Which two changes address these problems?", "o": ["Increase the client HTTP timeout and retry automatically when the connection drops", "Emit structured progress events for each tool invocation on the same stream so the UI can render step level status", "Log every disconnection with a request id so the team can investigate the 2 percent", "Persist streamed output server side as it is produced so a reconnecting client can recover the partial result", "Disable streaming and return the complete response once all work is finished"], "a": [1, 3], "e": "二つの症状に対して、それぞれ別の構造的手当てが要ります。無反応は進行状況の可視化で、切断時の消失はサーバー側の逐次永続化で解きます。Cはログで、原因調査には役立ちますが利用者の体験は何も変わりません。Aは再送で同じ長文を作り直すことになり、Eは全員の体験を落として2パーセントに対処します。", "p": "複数選択では、選択肢ごとに「この症状を実際に消すか」を1つずつ判定する。"}, {"pat": "設問の動詞", "d": "D3", "q": "A workflow has three steps: extracting fields from short forms, summarizing long case files and drafting customer replies. All three run on the same large model and the monthly bill is over budget. The CFO asks the architect to reduce cost without reducing quality. What should the architect do?", "o": ["Batch the three steps into a single prompt to reduce the number of requests", "Switch all three steps to the smallest available model", "Evaluate each step separately and route it to the smallest model that still meets that step's measured quality bar", "Negotiate volume pricing with the vendor before making architectural changes", "Cache responses so that repeated cases cost less"], "a": [2], "e": "「品質を落とさずに」という条件が付いているため、測定を伴わない削減案はすべて条件を満たしません。工程ごとに品質基準を測り、満たす最小のモデルへ振り分けるのが唯一の答えです。Eは有効な手段ですが、繰り返しの少ないワークロードでは効かず、また品質の保証とは無関係です。", "p": "設問に付いた条件（品質を落とさず）を満たさない選択肢は、良い案でも不正解。"}, {"pat": "予防 vs 発見", "d": "D3", "q": "Select THREE. An MCP server that exposes a CRM is being promoted from prototype to production. Which three requirements should the architect make mandatory before release?", "o": ["The end user's identity is propagated and each call is authorized against that user's own entitlements", "The tool descriptions clearly warn which operations are dangerous", "The credential is scoped so that operations the workflow does not need are not exposed at all", "All operations are logged to a central audit store", "Irreversible operations require explicit human confirmation and accept an idempotency key so a retry cannot duplicate the change"], "a": [0, 2, 4], "e": "本番昇格の必須要件は、認可（誰として呼ぶか）、最小権限（何を呼べるか）、不可逆操作の保護（取り返しがつくか）の三つです。Dの監査ログは運用上必要ですが、事故を防ぐ統制ではありません。Bは説明文で、助言であって強制ではありません。三つ選ぶ場面でも、選び方の基準は一つずつ同じです。", "p": "必須要件を三つ選ぶときも、基準は「これは事故を防ぐか」。ログは防がない。"}, {"pat": "予防 vs 発見", "d": "D3", "q": "An order status agent depends on a fulfillment API that suffers 40 minute outages roughly twice a quarter. During an outage every conversation fails. The API team cannot improve availability this year. What should the architect implement?", "o": ["More aggressive retries so that requests succeed as soon as the API recovers", "An alert to the on call engineer whenever the fulfillment API error rate rises", "A local cache of all order records served as the source of truth", "Automatic shutdown of the agent whenever the fulfillment API is unavailable", "A circuit breaker with a defined degraded mode in which the agent states that status is temporarily unavailable, answers what it still can, and offers a callback"], "a": [4], "e": "可用性を上げられない依存先は、落ちる前提で設計します。無駄な再試行を止め、縮退時の振る舞いを定義するのが正解です。Bは検知であって利用者の体験は変わりません。Dはエージェント全体を止める過剰反応で、注文以外の会話まで失われます。", "p": "上げられない可用性は、縮退動作の設計に置き換える。"}, {"pat": "複数選択の規律", "d": "D3", "q": "Select TWO. A team enables prompt caching on an agent whose request contains, in order: tool definitions, a system prompt, a 40,000 token catalog that changes weekly, the conversation history and the new user message. The cache hit rate is near zero. Which two statements explain or fix this?", "o": ["The cache breakpoint must sit immediately after the catalog, so the stable prefix ends before the conversation history begins", "The catalog is too large to be cached and must be split", "Cache matching works on the prefix, so any variable content placed before the stable content prevents a match", "The cache expires too quickly for weekly changing content", "Caching does not apply to requests that include tool definitions"], "a": [0, 2], "e": "キャッシュは前方一致で、区切りは安定領域の直後に置きます。会話履歴まで含めると毎回ずれます。Bは誤りで大きさは問題ではなく、Eも誤りでツール定義はむしろ前方に置かれてキャッシュ対象になります。Dはカタログが週1回しか変わらないという前提と矛盾します。", "p": "複数選択でも、誤った記述は誤りとして単独で切れる。"}, {"pat": "構造 vs モデル任せ", "d": "D3", "q": "An agent tool issues refunds through a partner API. A network timeout leaves the caller unable to determine whether the refund was applied, and the current code retries. Finance has found duplicate refunds. What should the architect require?", "o": ["The agent should call a status check tool before every retry", "The refund tool must accept an idempotency key so that a repeated call with the same key returns the original result instead of issuing a second refund", "Retries should be removed and every timeout escalated to a human", "The timeout should be raised so that the response has more time to arrive", "The model should be instructed not to retry refunds"], "a": [1], "e": "タイムアウトは「未実行」と「実行済みで応答が届かなかった」を区別できません。冪等キーでサーバー側が重複を吸収する設計だけが、安全な再送を可能にします。Aは確認と再送の間に競合が残り、Eはモデル任せです。", "p": "再送の安全性は冪等キーで担保する。確認してから送る、では競合が残る。"}, {"pat": "複数選択の規律", "d": "D3", "q": "Select TWO. A single deployment serves users in the EU and the US. Legal requires that EU customer data be processed within the EU, and EU users also report higher latency. Which two changes should the architect make?", "o": ["Add a system prompt instruction telling the model not to move EU data outside the EU", "Encrypt EU data in transit so that the processing location no longer matters", "Route EU traffic to an EU deployment so that the entire data path stays inside the region", "Add monitoring that detects when EU data is processed outside the EU", "Place the retrieval index and any conversation storage for EU users inside the EU as well, not only the model endpoint"], "a": [2, 4], "e": "データの所在は基盤とルーティングで決まる物理的な事実で、指示や暗号化では変わりません。さらにモデルの呼び出し先だけを域内にしても、検索インデックスや会話の保存先が域外なら要件は満たされません。経路全体を域内に収める必要があります。Dは検知で、既に域外に出た後です。", "p": "データ所在は経路全体で満たす。モデル呼び出し先だけでは足りない。"}, {"pat": "前提の組み替え", "d": "D1", "q": "A team wants to automate the review of inbound vendor contracts. Today a lawyer reads each contract, extracts twelve fields, checks them against policy and writes a recommendation. The team proposes a single agent that performs the whole task end to end. What should the architect propose?", "o": ["Build the single agent as proposed, since the task is well understood", "Reject the automation, since contract review carries legal risk", "Replace the lawyer entirely but add a monthly quality audit", "Decompose the task: deterministic extraction of the twelve fields, a rules based policy check where the policy is explicit, and model generated recommendations that the lawyer reviews. Measure each part separately", "Start with a chatbot that answers lawyers' questions about contracts"], "a": [3], "e": "三つの異なる性質の作業が一つに束ねられています。抽出は検証可能、ポリシー照合は決定的に書ける部分が多く、推奨は判断を含みます。性質ごとに分けると、それぞれ適した実装と測定ができ、どこが弱いかも見えます。Aは束ねたまま、Bは全否定、Eは価値の低い部分だけを取ります。", "p": "複数の性質が混ざったタスクは、性質ごとに分解してから実装方式を選ぶ。"}, {"pat": "複数選択の規律", "d": "D1", "q": "Select TWO. A team is deciding between a fixed sequential pipeline and an agent loop that chooses its own tools. Which two conditions favor the agent loop?", "o": ["The sequence of steps varies by case and cannot be enumerated in advance", "The task must complete within a strict latency budget", "Every run must be reproducible for audit purposes", "The volume is high and the cost per run must be minimized", "New tools will be added over time and the workflow should incorporate them without being rewritten"], "a": [0, 4], "e": "エージェントループが有利なのは、手順が事前に列挙できない場合と、ツールが増えていく場合です。B、C、Dはすべて固定パイプラインが有利になる条件で、ループは遅く、再現性が低く、1件あたりのコストも高くなります。", "p": "「どちらが有利か」を問われたら、選択肢を一つずつ両方式に当てて判定する。"}, {"pat": "予防 vs 発見", "d": "D1", "q": "An agent drafts responses to regulatory inquiries. A wrong statement to the regulator cannot be withdrawn. The team asks where the human should sit in the workflow. What should the architect specify?", "o": ["Human approval before the response is sent, on the specific text that will be sent", "Human review of a weekly sample of sent responses", "Human review of the agent's reasoning trace after sending", "A confidence score from the model, with human review only below a threshold", "A second model that reviews each response before sending"], "a": [0], "e": "取り消せない出力は、出る前に人が見る以外に守りようがありません。B、Cは事後で、送信済みの誤りは戻せません。Dはモデルの自己申告した確信度に依存し、較正の保証がありません。Eはモデルでモデルを検査する構造で、決定的な保証になりません。", "p": "不可逆な出力は、出る前の承認。事後レビューは統制ではない。"}, {"pat": "保留 vs 早すぎる断定", "d": "D1", "q": "Select THREE. Before choosing an architecture for a new assistant, which three things must the architect settle first?", "o": ["Which model version will be used in production", "What the assistant is accountable for and what is explicitly out of scope", "What a wrong answer costs and whether it can be undone", "Which vector database the team prefers", "How quality will be measured and what threshold makes the system acceptable"], "a": [1, 2, 4], "e": "アーキテクチャを決める前に必要なのは、責任範囲、誤りのコストと可逆性、そして品質の測り方と合格基準です。AとDは実装の選択で、上の三つが決まった後に従属的に決まります。順序を逆にすると、測れないものを作ることになります。", "p": "アーキテクチャの前に決めるのは、範囲・誤りのコスト・合格基準。実装技術ではない。"}, {"pat": "前提の組み替え", "d": "D1", "q": "A business owner writes into the requirements that the assistant must handle every document type the company receives, including scanned faxes and handwritten notes. Current accuracy on handwriting is poor. What should the architect propose?", "o": ["Accept the requirement and add a handwriting recognition service to the pipeline", "Refuse the requirement, since handwriting recognition is unreliable", "Reframe it: measure the actual volume and business value by document type, commit to the types that are both common and reliably handled, route the rest to a human queue, and revisit with data", "Accept the requirement and add a disclaimer to outputs from handwritten sources", "Ask the business owner to stop accepting handwritten documents"], "a": [2], "e": "「すべての種類を扱う」は要件ではなく願望です。種類ごとの量と価値を測り、確実に扱えるものを約束し、残りは人へ回して、データを見て広げる。これが要件の組み替えです。Aは量も価値も測らずに投資を決め、Eは業務側の受付方法を変えろという実現性の低い要求です。", "p": "「すべて対応」は、量と価値の測定と、段階的な約束に組み替える。"}, {"pat": "複数選択の規律", "d": "D1", "q": "Select TWO. A service agent can issue account credits. Compliance initially required approval for every credit, which eliminated the time saving. Which two changes should the architect propose?", "o": ["A value threshold below which the agent acts autonomously, derived from the actual distribution of credit amounts and the cost of an error", "A faster approval interface so that reviewing every credit takes less time", "The model estimating its own confidence and escalating when it is low", "A reversal window during which any autonomous credit can be undone, with exceptions reported to compliance on a schedule", "Post hoc sampling by compliance with no threshold and no reversal"], "a": [0, 3], "e": "全件承認か全件自動かの二択を、金額のしきい値と可逆性で組み替えます。Bは承認を速くするだけで、判断の負荷は残ります。Cはモデルの自己申告に統制を委ねるもので較正の保証がありません。Eは歯止めが何もありません。", "p": "権限設計はしきい値と可逆性の組み合わせ。速度改善は組み替えではない。"}, {"pat": "保留 vs 早すぎる断定", "d": "D4", "q": "A team is building an evaluation set for a support assistant. They plan to write 200 questions themselves, covering the topics they think matter. What should the architect advise?", "o": ["Two hundred cases is too few and the set should contain at least a thousand", "The set should be generated by a model to remove human bias", "The set should be reviewed by a subject matter expert before use", "The questions should be phrased consistently so that results are comparable", "The set should be drawn from and weighted by the distribution of real production queries, including the messy and ambiguous ones, rather than from what the team imagines matters"], "a": [4], "e": "自作の評価セットは、チームが想像する分布を測ります。本番で効かない改善が「効いた」ように見える最大の原因がこれです。実際のクエリ分布から抽出し、扱いにくいものも含めるのが本質です。Aは量の話で、代表性のない1000件は200件より良くありません。", "p": "評価セットの価値は量ではなく代表性。本番の分布から作る。"}, {"pat": "複数選択の規律", "d": "D4", "q": "Select TWO. A team wants to detect quality regressions in a production assistant that handles 20,000 conversations a day. Which two mechanisms give them that?", "o": ["A dashboard showing daily request volume and error rate", "A held out set of production representative cases run automatically against the live configuration on a schedule, with results tracked over time", "Weekly manual review of ten randomly chosen conversations", "Online proxy metrics such as escalation rate, conversation length and repeat contact rate, monitored against a baseline with alert thresholds", "A quarterly survey of user satisfaction"], "a": [1, 3], "e": "品質の劣化は、定期的に走る代表的な評価セットと、本番で継続的に観測できる代理指標の二本立てで捉えます。Aは稼働の指標で品質ではありません。Cは10件では検出力がなく、Eは頻度が低すぎて劣化の発見が四半期遅れます。", "p": "品質の監視は、定期評価と本番の代理指標。稼働指標は品質ではない。"}, {"pat": "設問の動詞", "d": "D4", "q": "A regulator requires that the assistant never states an interest rate that differs from the official rate table. The team asks the architect how to evaluate this. What should the architect say?", "o": ["Add interest rate questions to the evaluation suite and track the accuracy percentage", "This is not an evaluation requirement but an enforcement requirement: the rate must be inserted from the rate table by the application, not generated by the model, and any generated rate must be rejected before delivery", "Instruct the model to quote rates only from the provided table", "Have a second model verify each rate before the response is sent", "Sample outputs weekly and check the rates that appear"], "a": [1], "e": "「never」という要件は評価では満たせません。評価は確率を測るもので、絶対を保証しません。値をアプリケーション側で差し込み、生成された値は拒否する。これは評価ではなく強制の問題です。設問は「どう評価するか」と聞いていますが、正しい答えは前提の否定を含みます。", "p": "never の要件は評価では満たせない。評価と強制を混同しない。"}, {"pat": "保留 vs 早すぎる断定", "d": "D4", "q": "Select THREE. Which three things belong in an evaluation suite for a RAG based assistant?", "o": ["Retrieval quality measured separately, such as whether the correct passage appears in the retrieved set", "Answer correctness given the retrieved context, measured independently of retrieval", "The average response latency of the production endpoint", "Behavior when retrieval returns nothing relevant, including whether the assistant declines rather than inventing an answer", "The number of documents in the index"], "a": [0, 1, 3], "e": "RAGの評価は検索と生成を分けて測り、さらに検索が失敗したときの振る舞いを測ります。この三つが揃って初めて、どこが悪いのか切り分けられます。Cは性能指標で品質ではなく、Eは規模であって品質を何も語りません。", "p": "RAGの評価は、検索・生成・失敗時の振る舞いの三つに分解する。"}, {"pat": "保留 vs 早すぎる断定", "d": "D4", "q": "An A/B test of a new prompt shows a 2 point improvement in task success after 300 sessions per arm. The team wants to ship. What should the architect say?", "o": ["Ship it, since the direction is positive and the change is low risk", "Do not ship it, since a 2 point gain is not worth the deployment risk", "A 2 point difference on 300 sessions per arm is not distinguishable from noise. Calculate the sample size required for this effect size, then either continue the test or treat the change as unproven", "Ship it to half of traffic and decide later", "Re run the test with a more sensitive metric"], "a": [2], "e": "効果量が小さいほど必要な標本は急激に増えます。300件で2ポイントは偶然の範囲で、符号は証拠になりません。Bも誤りで、2ポイントの価値は規模次第です。判断すべきは価値ではなく測定の十分性です。", "p": "符号だけでは判断しない。効果量に対して標本が足りているかを問う。"}, {"pat": "複数選択の規律", "d": "D5", "q": "Select TWO. An internal support agent answers from a wiki that any employee can edit, and it can reset passwords and unlock accounts through tools. Which two controls should the architect require?", "o": ["Treat all retrieved wiki content as untrusted data that cannot carry instructions, and separate it from the instruction channel", "Add a freshness check that flags wiki pages older than six months", "Log every password reset and review the log weekly", "Gate the password reset and unlock tools behind authorization that is independent of anything appearing in the retrieved content", "Ask the model to cite the wiki page it used for each answer"], "a": [0, 3], "e": "誰でも編集できる内容がコンテキストに入り、副作用のあるツールがある。この組み合わせが間接プロンプトインジェクションの成立条件です。取得内容を命令として扱わないことと、危険なツールを独立の認可で守ることの二つで断ちます。Cは事後、Bは鮮度で攻撃とは無関係、Eは出典表示で実行は止まりません。", "p": "インジェクション対策は、入力の扱いと、ツールの認可。両方が要る。"}, {"pat": "予防 vs 発見", "d": "D5", "q": "An operations agent can delete stale customer records. The team proposes logging every deletion and reviewing the log monthly. What should the architect say?", "o": ["The log should be reviewed weekly instead of monthly", "The log should include the reasoning trace so reviewers understand each decision", "Deletion should require the model to explain itself before executing", "Deleted data cannot be restored by reviewing a log. Either remove the delete capability and route deletions through the existing reviewed process, or require human approval on the specific records before deletion", "The log should trigger an alert when more than ten records are deleted at once"], "a": [3], "e": "削除されたデータはログを読んでも戻りません。統制は実行前に置く必要があります。A、B、Eはいずれもログの改良で、事後という性質は変わりません。Cは説明を求めるだけで実行は止まりません。この設問は、発見的統制の改良案を四つ並べて誘導しています。", "p": "発見的統制をいくら改良しても、不可逆な操作は守れない。"}, {"pat": "複数選択の規律", "d": "D5", "q": "Select TWO. A team logs full request and response payloads, including customer messages, to an observability platform readable by the whole engineering organization. Which two changes should the architect require?", "o": ["Shorten the log retention period to 30 days", "Redact or tokenize personal data in the application before the payload leaves it", "Move the logs to an encrypted storage bucket", "Ask engineers to avoid opening customer conversations unless debugging", "Restrict read access on any store that still contains unredacted personal data to a named group with a documented business need"], "a": [1, 4], "e": "個人情報は出ていく前に落とし、それでも残る場所は閲覧範囲を絞る。この二つが統制です。AとCは保管条件の改善で、組織全体が読める状態は変わりません。Dは運用者の善意に依存します。", "p": "個人情報は、出る前に落とす。残る場所は読める人を絞る。"}, {"pat": "保留 vs 早すぎる断定", "d": "D5", "q": "A loan pre screening assistant produces recommendations that a human reviewer approves. Reviewers approve 98 percent of recommendations within seconds each. What should the architect conclude?", "o": ["The review has become a rubber stamp and is no longer functioning as a control. Seed known incorrect cases to measure the reviewer detection rate, and redesign the step around the decisions that genuinely need judgment", "The model is accurate enough that the human step can be removed", "The high agreement rate confirms the system is working well", "The reviewer pool can be reduced to save cost", "Approval speed should be tracked as a productivity metric"], "a": [0], "e": "98パーセントを数秒で承認しているのは精度の証拠ではなく、レビューが機能していない証拠です。高すぎる一致率は安心材料ではなく警告として読みます。検知率を意図的に測るのが確認手段です。", "p": "高すぎる一致率は、精度ではなく統制の形骸化を示す。"}, {"pat": "複数選択の規律", "d": "D5", "q": "Select TWO. An assistant acts on behalf of users against several internal systems. Which two properties must hold for the authorization design to be sound?", "o": ["The assistant holds a single service account with the union of all permissions its users might need", "Each downstream call carries the acting user's identity and is authorized against that user's own entitlements", "The system prompt describes which users are allowed to access which systems", "Audit records attribute each action to the acting user, not to the assistant", "The assistant refuses requests that appear to be outside the user's role"], "a": [1, 3], "e": "代理実行の設計は、呼び出し時に実ユーザーとして認可されることと、監査が実ユーザーに帰属することの二つで成立します。Aは権限の合算で最悪の設計、Cはプロンプトによる統制、Eはモデルの判断に認可を委ねるもので、いずれも保証がありません。", "p": "代理実行は、実行時の認可と監査の帰属。両方が実ユーザー単位。"}, {"pat": "保留 vs 早すぎる断定", "d": "D6", "q": "In the same month, a team deployed a Claude based triage assistant and the operations group added two staff. Average handling time fell 25 percent. The sponsor wants to attribute the gain to the assistant in a board update. What should the architect say?", "o": ["The assistant deserves the credit, since the timing aligns with its deployment", "The credit should be split proportionally to the size of each change", "The gain cannot be measured reliably, so a different metric should be used", "The staffing change deserves the credit, since adding people has a more direct effect", "The two changes are confounded and neither can be credited from this data. Propose a separation, such as comparing case types the assistant does not handle, or a period when staffing was constant"], "a": [4], "e": "同時期の二つの変更は分離できません。求められているのは推測ではなく、分離する測り方の提案です。Bの比例配分は根拠のない数字を作る行為で、Cは測定そのものを諦めています。", "p": "交絡した効果は、断定も配分もせず、分離する測定を設計する。"}, {"pat": "複数選択の規律", "d": "D6", "q": "Select TWO. A pilot agent is being handed to a business team with no engineering staff. Which two things must the handover package contain?", "o": ["A defined escalation path with a named engineering owner for failures the business team cannot resolve", "A three day workshop covering the system architecture", "A small set of health indicators the business team can read themselves, each with a documented action when it goes out of range", "A commitment from the business team to review every agent output", "Training for the business team on prompt engineering"], "a": [0, 2], "e": "技術者のいない受け手に必要なのは、自分で読める少数の指標と、異常時に渡す先です。Bは一過性で所有権が移りません。Dは全件確認で自動化の価値を消し、やがて形骸化します。Eは運用の自立とは別問題です。", "p": "非技術チームへの引き渡しは、読める指標と、名前のあるエスカレーション先。"}, {"pat": "前提の組み替え", "d": "D6", "q": "An executive sponsor saw a demonstration built on a copy of production data and told the board that company wide rollout will happen next month. The team knows the demo bypassed authorization, error handling and the approval workflow. What should the architect do?", "o": ["Proceed with the rollout and build the missing controls in parallel", "Give the sponsor a written gap list separating what the demo proved from what production requires, with the effort each gap needs, and propose a scoped first release that can meet the announced timing", "Ask the sponsor to correct the statement to the board", "Escalate to the sponsor's manager that the timeline is not achievable", "Build the missing controls quietly and inform the sponsor when they are ready"], "a": [1], "e": "スポンサーは嘘をついたのではなく、デモが何を証明していないかを知りません。証明済みと未証明の境界を文書化し、発表した時期に間に合う縮小案を出すのがアーキテクトの仕事です。Cは面子を潰すだけ、Dは順序が早すぎ、Eは情報を隠します。", "p": "期待のズレは、線引きの可視化と、実行可能な代替案で扱う。"}, {"pat": "複数選択の規律", "d": "D6", "q": "Select TWO. A production agent gave incorrect pricing to 40 customers over six hours before the issue was caught. Which two things should the architect do first, before any technical fix?", "o": ["Determine the blast radius: which customers, which quotes, and whether any were acted on", "Add an evaluation case covering the specific failure", "Notify the business owner and agree who contacts the affected customers and by when", "Write a post incident review document", "Roll back to the previous prompt version"], "a": [0, 2], "e": "技術的な修正の前にやることは、影響範囲の確定と、業務側との連絡合意です。Eのロールバックは重要ですが技術的対処であり、設問は「技術的修正の前」と限定しています。BとDはいずれも後続の作業です。設問の限定条件を読み落とすと、正しそうな選択肢を選んでしまいます。", "p": "設問の限定条件（before any technical fix）が、正解の範囲を決める。"}, {"pat": "設問の動詞", "d": "D6", "q": "A model used in four production workflows will be retired in six months. What should the architect do first?", "o": ["Switch all four workflows to the newest model immediately", "Wait until closer to the deadline, since the workflows are stable", "Rewrite the prompts so they are model agnostic", "Inventory the four workflows, run each one's evaluation suite against the replacement model, and schedule migration by risk and effort", "Request an extension from the vendor"], "a": [3], "e": "「まず何をするか」を問われています。棚卸しと評価スイートによる差分の実測が最初で、そこから初めて順序と工数が決まります。Aは検証なしの一斉切り替え、Cは望ましい方向ですが現状把握の前には置けません。", "p": "first を問われたら、行動ではなく現状把握が答えになることが多い。"}, {"pat": "構造 vs モデル任せ", "d": "D2", "q": "A planning assistant holds conversations reaching 300 turns. Late in a conversation it forgets earlier decisions and contradicts itself. What should the architect do?", "o": ["Maintain a running structured record of decisions and constraints and carry that forward in place of the raw transcript", "Move to a model with a larger context window and send the entire transcript", "Instruct the model to remember everything discussed so far", "Start a fresh conversation every 50 turns", "Increase max_tokens so the model can produce more complete answers"], "a": [0], "e": "長い会話で失われるのは容量ではなく重要情報の顕在性です。決定事項を構造化して持ち回れば、全履歴を送るより確実で安価になります。Bは窓を広げても薄まった情報は薄いままで、コストだけ増えます。", "p": "長い会話は、履歴の全送ではなく決定事項の構造化で扱う。"}, {"pat": "複数選択の規律", "d": "D2", "q": "Select TWO. A team must reduce the cost of a high volume assistant without measurable quality loss. Which two changes are most likely to achieve that?", "o": ["Reduce max_tokens so responses are shorter", "Reorder the request so the large stable instruction set forms a cacheable prefix, and enable prompt caching", "Route the simplest request category to a smaller model after confirming with an evaluation that quality holds for that category", "Lower the temperature so the model produces more predictable output", "Remove the retrieved context and rely on the model's own knowledge"], "a": [1, 2], "e": "品質を落とさずにコストを下げる手は、同じ内容を安く送る（キャッシュ）ことと、品質が保てる範囲で小さいモデルに回す（測定つきルーティング）ことです。Aは回答を切り詰めるので品質に影響し、Dはコストと無関係、Eは品質を大きく落とします。", "p": "「品質を落とさず」の条件下では、内容を削る案はすべて落ちる。"}, {"pat": "構造 vs モデル任せ", "d": "D2", "q": "A downstream service requires a strict JSON object from every response. The team parses with a regular expression and about 4 percent fail. What should the architect do?", "o": ["Improve the regular expression to handle the observed variations", "Retry the request when parsing fails", "Instruct the model to reply with JSON only", "Add a second model call that reformats the response into JSON", "Define the required shape as a tool schema so the model returns the object through a validated tool call, and validate it before use"], "a": [4], "e": "形式の保証をモデルの遵守や正規表現に頼るのが誤りです。スキーマとして定義すれば、形式は仕組みとして担保されます。Dはモデルを一段重ねるだけで保証は増えず、コストと遅延が増えます。", "p": "形式の保証はスキーマで。プロンプトと後処理は保証にならない。"}, {"pat": "複数選択の規律", "d": "D2", "q": "Select TWO. Which two changes invalidate a previously cached prompt prefix?", "o": ["Adding a new tool definition to the request", "Changing the user's final message", "Editing a sentence in the system prompt that sits before the cache breakpoint", "Increasing max_tokens", "Changing the temperature"], "a": [0, 2], "e": "キャッシュは前方一致なので、区切りより前にある内容を変えると無効化されます。ツール定義とシステムプロンプトはいずれも前方に位置します。Bは区切りより後なので影響せず、DとEは生成時のパラメータでプレフィックスの内容ではありません。", "p": "無効化するのは区切りより前の内容の変更だけ。生成パラメータは関係ない。"}, {"pat": "前提の組み替え", "d": "D7", "q": "Across nine teams there are 34 custom slash commands. Eleven perform essentially the same release note generation with slightly different output formats, and two of those embed a deployment step retired four months ago. What should the architect propose?", "o": ["Document all 34 commands on a wiki page so teams can check before writing a new one", "Ban team level commands and route all command creation through the platform team", "Publish a small reviewed set as a versioned distributed package with a named owner and a deprecation path, and let teams keep local commands only for genuinely team specific work", "Create a shared directory where any team may add commands, relying on peer review", "Leave the duplication in place and fix only the outdated deployment step"], "a": [2], "e": "二件が四ヶ月放置されていた事実が示すのは、重複ではなく所有者と更新の伝播経路の不在です。オーナー付きの版管理された配布に置き換え、ローカルの自由は残します。Dは共有しても所有していない状態で、投入後の腐敗を誰も見ません。", "p": "標準化の問題は、所有者と配布経路を作る案が正解。可視化も禁止も不十分。"}, {"pat": "複数選択の規律", "d": "D7", "q": "Select TWO. A CTO wants to measure the impact of Claude Code adoption. Which two measures give a defensible signal?", "o": ["The percentage of merged lines of code generated by the tool", "Cycle time from first commit to merge, compared against a baseline period and against teams not yet using the tool", "The number of prompts developers send per day", "Change failure rate and rework rate, so that speed gains are not achieved by shipping worse code", "The number of developers who have the tool installed"], "a": [1, 3], "e": "生成量や利用量は活動の指標であって成果ではありません。速度（サイクルタイム）を比較対象付きで測り、同時に品質（失敗率と手戻り）を測ることで、速くなった分だけ壊れていないかが分かります。A、C、Eはいずれも増えても価値を意味しません。", "p": "生産性は、速度と品質を対で測る。活動量は成果ではない。"}], DOMS={"D1": "ソリューション設計", "D2": "モデル/プロンプト/コンテキスト", "D3": "統合とデプロイ", "D4": "評価・テスト・最適化", "D5": "ガバナンス/安全/リスク", "D6": "ステークホルダー/ライフサイクル", "D7": "開発者生産性"};
+var KEY="ccarp_v3_v1", FSKEY="ccarp_fsv3";
+var ST={}; try{ST=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){ST={};}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ST));}catch(e){}}
+var K=1.15; try{var kk=parseFloat(localStorage.getItem(FSKEY)); if(kk)K=kk;}catch(e){}
+document.documentElement.style.setProperty("--k",K);
+function setK(d){K=Math.min(1.8,Math.max(.9,Math.round((K+d)*100)/100));
+ document.documentElement.style.setProperty("--k",K);
+ try{localStorage.setItem(FSKEY,K);}catch(e){}}
+
+var PATS=[]; for(var i=0;i<Q.length;i++) if(PATS.indexOf(Q[i].pat)<0) PATS.push(Q[i].pat);
+PATS.sort();
+var filt="ALL", idx=[], ci=0, view="q";
+function build(){ idx=[];
+ for(var i=0;i<Q.length;i++){
+  if(filt==="ALL") idx.push(i);
+  else if(filt==="NG"){ var s=ST[i]; if(s&&!s.ok) idx.push(i); }
+  else if(filt==="NGF"){ var s=ST[i]; if(s&&!s.first) idx.push(i); }
+  else if(filt==="MULTI"){ if(Q[i].a.length>1) idx.push(i); }
+  else if(filt==="SINGLE"){ if(Q[i].a.length===1) idx.push(i); }
+  else if(filt.charAt(0)==="P"){ if(Q[i].pat===PATS[parseInt(filt.slice(1),10)]) idx.push(i); }
+  else if(Q[i].d===filt) idx.push(i); }
+ if(idx.length===0) idx=[0];
+ if(ci>=idx.length) ci=0; }
+function multi(q){return q.a.length>1;}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+var LT="ABCDE";
+function cnt(f){var n=0;for(var i=0;i<Q.length;i++){var s=ST[i];if(s&&f(s))n++;}return n;}
+function nDone(){var n=0;for(var i=0;i<Q.length;i++)if(ST[i])n++;return n;}
+
+function vQ(){
+ var gi=idx[ci], q=Q[gi], s=ST[gi], sel=s?s.sel:(ST["_t"+gi]||[]);
+ var d=nDone(), pct=Math.round(d/Q.length*100);
+ var h='<div class="bar"><div class="in"><div class="pb"><i style="width:'+pct+'%"></i></div>'+
+  '<span class="pos">'+d+'/'+Q.length+'</span>'+
+  '<button class="btn g sm" onclick="view=\'menu\';R()">メニュー</button></div></div><div class="pad"></div>';
+ h+='<div class="wrap"><span class="dm">'+q.d+' '+DOMS[q.d]+'</span>';
+ if(s) h+='<span class="pt2">'+esc(q.pat)+'</span>';
+ if(multi(q)) h+='<span class="tag">SELECT '+(q.a.length===3?"THREE":"TWO")+'</span>';
+ h+='<div class="stem">'+esc(q.q)+'</div>';
+ for(var j=0;j<q.o.length;j++){
+  var c="";
+  if(s){ if(q.a.indexOf(j)>=0) c=" ok"; else if(sel.indexOf(j)>=0) c=" ng"; }
+  else if(sel.indexOf(j)>=0) c=" sel";
+  h+='<div class="opt'+c+'"'+(s?'':' onclick="pick('+j+')"')+'>'+
+     '<span class="L">'+LT[j]+'</span>'+esc(q.o[j])+'</div>';
+ }
+ if(!s && multi(q)) h+='<p class="sub">'+q.a.length+'つ選んでください（現在 '+sel.length+' つ）</p>';
+ if(!s && multi(q)) h+='<p class="sub" style="color:#8fb6e0">選択肢を1つずつ、同じ基準で判定してください。1つ見つけたあとに基準を緩めないこと。</p>';
+ if(s){
+  h+='<div class="vd '+(s.ok?"o":"x")+'">'+(s.ok?"○ 正解":"× 不正解")+'</div>';
+  h+='<div class="hist">初回：'+(s.first?"○ 正解":"× 不正解")+' ／ 挑戦 '+s.n+' 回'+
+     (s.first?'':'（初回の記録は保持されます）')+'</div>';
+  h+='<div class="exp">'+esc(q.e)+'<div class="pt">→ '+esc(q.p)+'</div></div>';
+  h+='<button class="btn g sm" onclick="again('+gi+')">もう一度解く</button>';
+ }
+ h+='</div>';
+ h+='<div class="nav"><div class="in">'+
+    '<button class="btn g sm" onclick="mv(-1)"'+(ci===0?" disabled":"")+'>← 前</button>'+
+    '<span class="sp"></span><span class="pos">'+(ci+1)+' / '+idx.length+'</span><span class="sp"></span>'+
+    '<button class="btn" onclick="mv(1)"'+(ci===idx.length-1?" disabled":"")+'>次 →</button>'+
+    '</div></div>';
+ document.getElementById("app").innerHTML=h;
+}
+function pick(j){
+ var gi=idx[ci], q=Q[gi];
+ var tmp=(ST["_t"+gi]||[]).slice(), k=tmp.indexOf(j);
+ if(multi(q)){ if(k>=0)tmp.splice(k,1); else { if(tmp.length>=q.a.length)tmp.shift(); tmp.push(j);} }
+ else tmp=[j];
+ ST["_t"+gi]=tmp;
+ if(tmp.length===q.a.length){
+  var b=tmp.slice().sort(), c=q.a.slice().sort(), ok=true;
+  for(var m=0;m<b.length;m++) if(b[m]!==c[m]) ok=false;
+  var prev=ST["_h"+gi];
+  if(!prev){ prev={first:ok,n:0}; ST["_h"+gi]=prev; }
+  prev.n++;
+  ST[gi]={sel:tmp.slice(), ok:ok, first:prev.first, n:prev.n};
+  delete ST["_t"+gi];
+ }
+ save(); R();
+}
+function again(gi){ delete ST[gi]; delete ST["_t"+gi]; save(); R(); }
+function mv(d){ ci=Math.min(idx.length-1,Math.max(0,ci+d)); window.scrollTo(0,0); R(); }
+
+function vMenu(){
+ var d=nDone(), ok=cnt(function(s){return s.ok;}), f=cnt(function(s){return s.first;});
+ var h='<div class="wrap"><h1>CCAR-P 弱点特化 第3版 34問</h1>'+
+  '<p class="sub">weak32 の結果（初回30/34相当・誤答2問がいずれも Select TWO）を受けて作成。34問中17問が複数選択（Select TWO 14／Select THREE 3）です。出題傾向のラベルは解答後まで表示しません。</p>';
+ h+='<div class="note"><b>見るべき数字は「複数選択の初回正答率」です。</b>前回は単一選択が28/28、複数選択が2/4でした。ここが唯一の実測された弱点です。<br>また前回はパターン名を解答前に表示しており、罠の種類を事前に教えていました。今回は解答後にのみ表示します。</div>';
+ h+='<div class="card"><div class="big">'+(d?Math.round(f/d*100):0)+'%</div>'+
+    '<p class="sub" style="margin:0">初回正答 '+f+' / '+d+' 問（解答済 '+d+' / '+Q.length+'）<br>'+
+    '現在の状態での正答 '+ok+' 問</p></div>';
+ var bs={"単一選択":[0,0,0],"Select TWO":[0,0,0],"Select THREE":[0,0,0]};
+ for(var i=0;i<Q.length;i++){
+  var kk=Q[i].a.length===1?"単一選択":(Q[i].a.length===2?"Select TWO":"Select THREE");
+  bs[kk][2]++; if(ST[i]){ bs[kk][1]++; if(ST[i].first) bs[kk][0]++; } }
+ h+='<h2>形式別（初回）★最重要</h2><table><tr><th>形式</th><th class="r">初回正答</th><th class="r">率</th></tr>';
+ var kb=["単一選択","Select TWO","Select THREE"];
+ for(var x=0;x<kb.length;x++){ var b=bs[kb[x]];
+  var r=b[1]?Math.round(b[0]/b[1]*100):null;
+  h+='<tr><td>'+kb[x]+'</td><td class="r">'+b[0]+'/'+b[1]+' ('+b[2]+')</td>'+
+     '<td class="r"'+(r!==null&&r<78?' style="color:#e59a92;font-weight:800"':'')+'>'+
+     (r!==null?r+'%':'-')+'</td></tr>'; }
+ h+='</table>';
+ var by={};
+ for(var i=0;i<Q.length;i++){ var dm=Q[i].d; by[dm]=by[dm]||[0,0,0]; by[dm][2]++;
+  if(ST[i]){ by[dm][1]++; if(ST[i].first) by[dm][0]++; } }
+ h+='<h2>ドメイン別（初回）</h2><table><tr><th>ドメイン</th><th class="r">初回正答</th><th class="r">率</th></tr>';
+ var ks=Object.keys(by).sort();
+ for(var x=0;x<ks.length;x++){ var b=by[ks[x]];
+  h+='<tr><td>'+ks[x]+' '+DOMS[ks[x]]+'</td><td class="r">'+b[0]+'/'+b[1]+' ('+b[2]+')</td>'+
+     '<td class="r">'+(b[1]?Math.round(b[0]/b[1]*100)+'%':'-')+'</td></tr>'; }
+ h+='</table>';
+ var bp={};
+ for(var i=0;i<Q.length;i++){ var pp=Q[i].pat; bp[pp]=bp[pp]||[0,0,0]; bp[pp][2]++;
+  if(ST[i]){ bp[pp][1]++; if(ST[i].first) bp[pp][0]++; } }
+ h+='<h2>失点パターン別（初回）</h2><table><tr><th>パターン</th><th class="r">初回正答</th><th class="r">率</th></tr>';
+ var kp=Object.keys(bp).sort();
+ for(var x=0;x<kp.length;x++){ var b=bp[kp[x]];
+  h+='<tr><td>'+kp[x]+'</td><td class="r">'+b[0]+'/'+b[1]+' ('+b[2]+')</td>'+
+     '<td class="r">'+(b[1]?Math.round(b[0]/b[1]*100)+'%':'-')+'</td></tr>'; }
+ h+='</table>';
+ h+='<h2>絞り込み</h2><div class="row">';
+ var fs=[["ALL","全34問"],["MULTI","複数選択のみ (17)"],["SINGLE","単一選択のみ (17)"],
+         ["D3","D3 (7)"],["D1","D1 (6)"],["D4","D4 (5)"],["D5","D5 (5)"],["D6","D6 (5)"],
+         ["D2","D2 (4)"],["D7","D7 (2)"],
+         ["NGF","初回に間違えた問題"],["NG","現在の誤答"]];
+ for(var x=0;x<fs.length;x++)
+  h+='<button class="btn g sm'+(filt===fs[x][0]?" on":"")+'" onclick="setF(\''+fs[x][0]+'\')">'+fs[x][1]+'</button>';
+ for(var x=0;x<PATS.length;x++)
+  h+='<button class="btn g sm'+(filt==="P"+x?" on":"")+'" onclick="setF(\'P'+x+'\')">'+PATS[x]+'</button>';
+ h+='</div>';
+ h+='<h2>一覧</h2><div class="grid">';
+ for(var i=0;i<Q.length;i++){ var s=ST[i];
+  var c=""; if(s){ c=s.first?" ok":" ng"; if(!s.first&&s.ok) c+=" fx"; }
+  h+='<div class="gc'+c+'" onclick="jump('+i+')">'+(i+1)+'</div>'; }
+ h+='</div><p class="sub">緑=初回正解／赤=初回不正解（下辺が緑なら解き直して正解済み）</p>';
+ h+='<div class="card"><div class="row"><span class="sub" style="margin:0">文字サイズ</span>'+
+    '<span class="fs"><button onclick="setK(-0.1)">A-</button> <button onclick="setK(0.1)">A+</button></span>'+
+    '<span class="sp"></span><button class="btn g sm" onclick="rst()">記録を消去</button></div></div>';
+ h+='<div style="margin:16px 0 40px"><button class="btn" onclick="view=\'q\';R()">問題に戻る</button></div></div>';
+ document.getElementById("app").innerHTML=h;
+}
+function setF(f){filt=f;ci=0;build();view="q";window.scrollTo(0,0);R();}
+function jump(i){filt="ALL";build();ci=idx.indexOf(i);if(ci<0)ci=0;view="q";window.scrollTo(0,0);R();}
+function rst(){if(!confirm("初回記録を含むすべての解答記録を消去します。よろしいですか？"))return;ST={};save();build();R();}
+function R(){build(); if(view==="menu") vMenu(); else vQ();}
+build(); R();
+</script></body></html>
