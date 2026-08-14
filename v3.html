@@ -163,33 +163,56 @@ function markEl(m){
 }
 function speakItems(items){
   if(!SP){ alert("このブラウザは読み上げに対応していません。"); return; }
-  stopSpeak();
   sq=[];
   for(var i=0;i<items.length;i++){
     var cs=chunkText(items[i].t);
-    for(var j=0;j<cs.length;j++) sq.push({t:cs[j],lang:items[i].lang,mark:items[i].mark});
+    for(var j=0;j<cs.length;j++)
+      sq.push({t:cs[j],lang:items[i].lang,mark:items[i].mark,tries:0});
   }
-  sqi=0; speaking=true; syncBar(); nextChunk();
+  sqi=0;
+  var busy=false;
+  try{ busy = (SP.speaking || SP.pending); }catch(e){ busy=false; }
+  if(busy){ try{ SP.cancel(); }catch(e){} }
+  speaking=true; syncBar();
+  /* cancel() の直後に speak() すると最初の発話が捨てられる端末があるため間を空ける */
+  setTimeout(function(){ if(speaking) nextChunk(); }, busy?320:90);
 }
 function nextChunk(){
-  if(!speaking){ return; }
+  if(!speaking) return;
   if(sqi>=sq.length){ speaking=false; markEl(null); syncBar(); return; }
-  var it=sq[sqi++];
+  var it=sq[sqi], myIdx=sqi;
+  sqi++;
   markEl(it.mark||null);
   var u=new SpeechSynthesisUtterance(it.t);
   u.rate=RATE; u.pitch=1; u.volume=1;
   if(it.lang==="ja"){ u.lang="ja-JP"; if(VJA) u.voice=VJA; }
   else { u.lang="en-US"; if(VEN) u.voice=VEN; }
-  u.onend=function(){ if(speaking) setTimeout(nextChunk,60); };
-  u.onerror=function(){ if(speaking) setTimeout(nextChunk,60); };
-  try{ SP.speak(u); }catch(e){ speaking=false; syncBar(); }
+  var started=false, finished=false;
+  u.onstart=function(){ started=true; };
+  u.onend=function(){ if(finished) return; finished=true;
+    if(speaking) setTimeout(nextChunk,60); };
+  u.onerror=function(){ if(finished) return; finished=true;
+    if(speaking) setTimeout(nextChunk,60); };
+  try{ SP.resume(); }catch(e){}
+  try{ SP.speak(u); }catch(e){ speaking=false; markEl(null); syncBar(); return; }
+  /* 発話が始まらなかった場合は再試行する。cancel() は呼ばない（それ自体が取りこぼしの原因になるため） */
+  if(!it.tries) it.tries=0;
+  if(it.tries<2){
+    var wait = 900 + it.tries*700;
+    setTimeout(function(){
+      if(speaking && !started && !finished && sqi===myIdx+1){
+        it.tries++; finished=true;
+        sqi=myIdx; nextChunk();
+      }
+    },wait);
+  }
 }
 function stopSpeak(){ speaking=false; sq=[]; sqi=0; markEl(null);
   if(SP){ try{ SP.cancel(); }catch(e){} } syncBar(); }
 function toggleRead(){ if(speaking) stopSpeak(); else readQ(); }
 function readQ(){
   var gi=idx[ci], q=Q[gi];
-  var items=[{t:q.q,lang:"en",mark:"stem"}];
+  var items=[{t:"Question. "+q.q,lang:"en",mark:"stem"}];
   for(var j=0;j<q.o.length;j++)
     items.push({t:"Option "+LT[j]+". "+q.o[j], lang:"en", mark:"opt"+j});
   speakItems(items);
@@ -204,7 +227,8 @@ function readOne(j){
   var gi=idx[ci], q=Q[gi];
   speakItems([{t:"Option "+LT[j]+". "+q.o[j], lang:"en", mark:"opt"+j}]);
 }
-function readStem(){ var gi=idx[ci]; speakItems([{t:Q[gi].q,lang:"en",mark:"stem"}]); }
+function readStem(){ var gi=idx[ci];
+  speakItems([{t:"Question. "+Q[gi].q,lang:"en",mark:"stem"}]); }
 function readExp(){
   var gi=idx[ci], q=Q[gi], s=ST[gi]; if(!s) return;
   var ans="正解は "+q.a.map(function(i){return LT[i];}).join(" と ")+" です。";
@@ -357,11 +381,23 @@ h+='<div class="note"><b>見るべき数字は「複数選択の初回正答率�
   var c=""; if(s){ c=s.first?" ok":" ng"; if(!s.first&&s.ok) c+=" fx"; }
   h+='<div class="gc'+c+'" onclick="jump('+i+')">'+(i+1)+'</div>'; }
  h+='</div><p class="sub">緑=初回正解／赤=初回不正解（下辺が緑なら解き直して正解済み）</p>';
- h+='<div class="card"><div class="row"><span class="sub" style="margin:0">文字サイズ</span>'+
+ h+='<div class="card"><div class="row"><span class="sub" style="margin:0">音声の確認</span>'+
+   '<button class="btn g sm" onclick="speechTest()">テスト再生</button>'+
+   '<span class="sp"></span><span class="sub" style="margin:0" id="vinfo"></span></div>'+
+   '<p class="sub" style="margin:8px 0 0">「Question. This is the question. Option A.」と3つとも聞こえれば正常です。'+
+   '設問だけ聞こえない場合はもう一度押してください。</p></div>';
+h+='<div class="card"><div class="row"><span class="sub" style="margin:0">文字サイズ</span>'+
     '<span class="fs"><button onclick="setK(-0.1)">A-</button> <button onclick="setK(0.1)">A+</button></span>'+
     '<span class="sp"></span><button class="btn g sm" onclick="rst()">記録を消去</button></div></div>';
  h+='<div style="margin:16px 0 40px"><button class="btn" onclick="view=\'q\';R()">問題に戻る</button></div></div>';
  document.getElementById("app").innerHTML=h;
+}
+function speechTest(){
+  speakItems([{t:"Question. This is the question.",lang:"en"},
+              {t:"Option A. This is the first option.",lang:"en"},
+              {t:"日本語の解説はこの声で読み上げます。",lang:"ja"}]);
+  var el=document.getElementById("vinfo");
+  if(el) el.textContent = (VEN?VEN.name:"既定の英語音声")+" / "+(VJA?VJA.name:"日本語音声なし");
 }
 function setF(f){stopSpeak();filt=f;ci=0;lastAuto=-1;build();view="q";window.scrollTo(0,0);R();}
 function jump(i){stopSpeak();filt="ALL";build();ci=idx.indexOf(i);if(ci<0)ci=0;lastAuto=-1;view="q";window.scrollTo(0,0);R();}
