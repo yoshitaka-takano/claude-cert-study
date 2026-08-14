@@ -1,0 +1,201 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>CCAR-P 弱点特化 第2版 32問</title><style>
+:root{--bg:#12100e;--pn:#1c1917;--pn2:#231f1c;--line:#39322c;--tx:#f0ece7;--mu:#a79e94;
+--ac:#d97757;--ok:#4ea36a;--bad:#d1594f;--k:1.15}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);
+font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+line-height:1.6;padding-bottom:100px}
+.wrap{max-width:820px;margin:0 auto;padding:0 14px}
+h1{font-size:calc(23px*var(--k));margin:20px 0 6px;line-height:1.35}
+h2{font-size:calc(18px*var(--k));margin:24px 0 10px}
+p,li{font-size:calc(15px*var(--k))}
+.sub{color:var(--mu);font-size:calc(14px*var(--k));margin:0 0 14px}
+.card{background:var(--pn);border:1px solid var(--line);border-radius:13px;padding:16px;margin:12px 0}
+.btn{display:inline-block;background:var(--ac);color:#fff;border:0;border-radius:10px;
+padding:12px 18px;font-size:calc(15px*var(--k));font-weight:700;cursor:pointer;font-family:inherit}
+.btn:disabled{opacity:.35}
+.btn.g{background:transparent;border:1px solid var(--line);color:var(--tx);font-weight:600}
+.btn.sm{padding:8px 13px;font-size:calc(13px*var(--k))}
+.btn.on{background:#3a2116;border-color:var(--ac);color:var(--ac)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sp{flex:1}
+.bar{position:fixed;top:0;left:0;right:0;background:rgba(18,16,14,.97);
+border-bottom:1px solid var(--line);z-index:20;backdrop-filter:blur(8px)}
+.bar .in{max-width:820px;margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:10px}
+.pad{height:54px}
+.pb{height:5px;background:var(--pn2);border-radius:3px;overflow:hidden;flex:1;min-width:60px}
+.pb i{display:block;height:100%;background:var(--ac)}
+.pos{color:var(--mu);font-size:calc(13px*var(--k));white-space:nowrap}
+.dm{display:inline-block;background:var(--pn2);border:1px solid var(--line);border-radius:6px;
+padding:3px 9px;font-size:calc(12px*var(--k));color:var(--mu)}
+.pt2{display:inline-block;background:#1a2430;border:1px solid #35506b;color:#8fb6e0;
+border-radius:6px;padding:3px 9px;font-size:calc(12px*var(--k));margin-left:6px}
+.tag{display:inline-block;background:#3a2116;border:1px solid var(--ac);color:var(--ac);
+border-radius:6px;padding:3px 9px;font-size:calc(12px*var(--k));font-weight:700;margin-left:6px}
+.stem{font-size:calc(16px*var(--k));margin:13px 0 15px;line-height:1.7}
+.opt{display:block;background:var(--pn);border:1px solid var(--line);border-radius:11px;
+padding:13px 15px;margin:9px 0;cursor:pointer;font-size:calc(15px*var(--k));line-height:1.6}
+.opt.sel{border-color:var(--ac);background:#241812}
+.opt .L{font-weight:800;color:var(--mu);margin-right:8px}
+.opt.sel .L{color:var(--ac)}
+.opt.ok{border-color:var(--ok);background:#0f2213}
+.opt.ng{border-color:var(--bad);background:#25100f}
+.exp{background:var(--pn2);border-left:3px solid var(--ac);border-radius:0 9px 9px 0;
+padding:13px 15px;margin:12px 0;font-size:calc(14px*var(--k));line-height:1.75}
+.exp .pt{color:var(--ac);font-weight:700;margin-top:10px}
+.vd{font-weight:800;font-size:calc(16px*var(--k));margin:12px 0 0}
+.vd.o{color:var(--ok)} .vd.x{color:var(--bad)}
+.hist{color:var(--mu);font-size:calc(13px*var(--k));margin:6px 0 0}
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(18,16,14,.97);
+border-top:1px solid var(--line);z-index:20;backdrop-filter:blur(8px)}
+.nav .in{max-width:820px;margin:0 auto;padding:10px 14px;display:flex;gap:8px;align-items:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:7px;margin:12px 0}
+.gc{aspect-ratio:1;border-radius:9px;border:1px solid var(--line);background:var(--pn);
+display:flex;align-items:center;justify-content:center;font-weight:700;cursor:pointer;
+font-size:calc(14px*var(--k));position:relative}
+.gc.ok{background:#12301c;border-color:#2f6b45;color:#8fd6a6}
+.gc.ng{background:#2e1310;border-color:#7a332c;color:#e59a92}
+.gc.fx{box-shadow:inset 0 -4px 0 0 var(--ok)}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:calc(14px*var(--k))}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--mu);font-weight:600;font-size:calc(13px*var(--k))}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+.big{font-size:calc(38px*var(--k));font-weight:800;line-height:1.1;margin:4px 0}
+.fs button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);
+background:var(--pn);color:var(--tx);font-size:15px;font-weight:700;cursor:pointer}
+.note{background:#332b12;border:1px solid #6b5a2f;border-radius:11px;padding:13px 15px;
+margin:12px 0;font-size:calc(14px*var(--k));color:#e8d9a8;line-height:1.75}
+</style></head><body><div id="app"></div><script>
+var Q=[{"pat": "A: 予防 vs 発見", "d": "D5", "q": "An agent drafts and sends emails to external customers. The risk review flags that a wrong email cannot be recalled. What control should the architect require?", "o": ["Log every sent email and review a sample weekly", "Alert the team when the agent's daily send volume is unusual", "Instruct the model in the system prompt to double check tone and recipient before sending", "Restrict sending to approved templates and an approved recipient list, and require human send for anything outside that set", "Add a delay of 10 minutes before each email leaves the queue"], "a": [3], "e": "送信は取り消せないため、事後に見つけても損害は確定しています。テンプレートと宛先を設計時に限定し、範囲外は人が送る。これが予防的統制です。AとBは発見的統制で、送信そのものは止まりません。Eの遅延は、その10分間に誰も見ていなければ何も防ぎません。", "p": "取り消せない操作は、検知ではなく実行前に止める。"}, {"pat": "A: 予防 vs 発見", "d": "D3", "q": "A code review finds that the CRM tool schema exposed to the agent includes a delete_record operation. The workflow this agent supports never deletes anything. What should the architect do?", "o": ["Remove the delete operation from the tool schema and from the credential's permissions", "Add monitoring that alerts when a delete call is made", "Add a line to the tool description stating that delete must not be used", "Require the model to explain its reasoning before any delete call", "Keep the operation but route delete calls to a no-op implementation"], "a": [0], "e": "使わない能力を持たせている時点で不要なリスクです。スキーマと権限の両方から外すのが正解。Bは事後検知、CとDはモデルの遵守に依存します。Eは一見安全ですが、エージェントは削除できたと誤認し、その前提で後続の判断を進めるため、静かな不整合を生みます。", "p": "使わない能力は持たせない。最小権限は設計時に決まる。"}, {"pat": "A: 予防 vs 発見", "d": "D5", "q": "An agent writes generated files to a shared store. A misconfiguration once allowed it to write outside its designated directory. What should the architect require?", "o": ["A nightly integrity scan that detects files written outside the expected paths", "A security alert whenever a write occurs outside the directory", "A system prompt rule telling the model to stay within its own directory", "A quarterly review of the storage permissions", "Path scoping enforced inside the tool implementation, so that a path outside the allowed root is rejected before any write occurs"], "a": [4], "e": "境界の強制は、それを実行するコードの中で行います。ツール実装が絶対パスを解決して許可された根の外を拒否すれば、モデルが何を渡しても書き込めません。A、B、Dはすべて事後、Cはモデル任せです。", "p": "境界はツール実装の中で強制する。呼び出し側の善意に依存しない。"}, {"pat": "A: 予防 vs 発見", "d": "D1", "q": "An agent needs six fields from a customer table that has forty columns, several of which are sensitive. What should the architect specify?", "o": ["A quarterly access audit of the agent's database activity", "A data classification tag on the sensitive columns so reviewers can find them", "A database view or tool interface that exposes only the six required fields, with the agent's credential limited to that view", "A system prompt listing which columns the model is allowed to use", "Encryption at rest for the sensitive columns"], "a": [2], "e": "見せない列は、そもそも到達できないようにします。ビューと権限で絞れば、モデルが何を要求しても他の列は返りません。Dはモデル任せ、AとBは事後の可視化、Eは保存時の保護であって読み取りは防げません。", "p": "必要な範囲だけを露出する。残りは技術的に到達不能にする。"}, {"pat": "A: 予防 vs 発見", "d": "D3", "q": "An MCP server exposes an admin operation alongside ordinary read operations. Today the only thing discouraging misuse is a warning written in the tool description. What should the architect require?", "o": ["A clearer and more emphatic tool description", "Authorization enforced inside the MCP server, so that the admin operation is rejected unless the calling identity holds the required role", "Few shot examples in the system prompt showing correct use", "Logging of every admin operation invocation", "A separate agent that reviews admin calls before they execute"], "a": [1], "e": "ツールの説明文は助言であって統制ではありません。サーバー側で呼び出し元の権限を確認して拒否する、それだけが保証です。AとCは表現を変えるだけ、Dは事後、Eはモデルでモデルを見張る構造で決定的な保証になりません。", "p": "ツールの説明文は統制ではない。認可はサーバー側で強制する。"}, {"pat": "B: 構造 vs モデル任せ", "d": "D2", "q": "An assistant occasionally reveals fragments of its system prompt when users ask about its instructions. The system prompt contains an internal pricing rule the company does not want disclosed. What should the architect do?", "o": ["Add a strong instruction telling the model never to reveal its system prompt", "Move the system prompt to the end of the request so it is less salient", "Add a second model call that checks each response for leaked instructions", "Obfuscate the pricing rule so that it is not readable if leaked", "Remove the confidential rule from the prompt entirely and enforce it in application logic, so that there is nothing sensitive in the context to leak"], "a": [4], "e": "漏れて困る情報をコンテキストに置いている限り、漏洩確率をゼロにはできません。機密をプロンプトから外し、アプリケーション側のロジックで適用するのが構造的解決です。AとCはモデルの振る舞いに依存し、確率を下げるだけです。", "p": "漏れて困るものは、そもそもコンテキストに入れない。"}, {"pat": "B: 構造 vs モデル任せ", "d": "D4", "q": "A RAG assistant sometimes cites document identifiers that were not among the retrieved chunks. What should the architect implement?", "o": ["Validate every citation programmatically against the set of chunks actually retrieved, and drop or flag any citation that is not in that set", "Instruct the model to cite only documents it was given", "Ask the model to rate its own confidence in each citation", "Retrieve more chunks so the cited documents are more likely to be present", "Fine tune the model on correctly cited examples"], "a": [0], "e": "引用の正しさは、検索結果という既知の集合と突き合わせれば決定的に検証できます。プログラムで照合すべき場面でモデルに頼る理由がありません。Dは的外れで、存在しない引用を作る癖は取得数では直りません。", "p": "照合できる事実は、プログラムで照合する。モデルの自己申告に置き換えない。"}, {"pat": "B: 構造 vs モデル任せ", "d": "D3", "q": "An agent calls a paid partner API. The company must never exceed a monthly spend cap on that API. What should the architect implement?", "o": ["State the remaining budget in the system prompt and update it daily", "Send a daily spend report to the team", "Enforce the cap in the tool layer or gateway with a hard counter that rejects calls once the cap is reached", "Ask the model to minimize partner API calls", "Set an alert at 80 percent of the cap"], "a": [2], "e": "「絶対に超えない」という要件は、決定的な仕組みでしか満たせません。ゲートウェイでカウントし、上限で拒否する。A、Dはモデル任せ、B、Eは通知であって停止ではありません。", "p": "never や must の要件は、決定的な仕組みで満たす。"}, {"pat": "B: 構造 vs モデル任せ", "d": "D2", "q": "An assistant must always reply in the language of the user's message. About 3 percent of replies come back in the wrong language. What should the architect do?", "o": ["Strengthen the prompt instruction about matching the user's language", "Detect the language deterministically outside the model, pass it as an explicit parameter, and validate the response language before delivery", "Add few shot examples in several languages", "Use a larger model that handles multilingual input better", "Ask the user to select their language at the start of the conversation"], "a": [1], "e": "言語判定は決定的に行えます。検出をモデルの外に出し、生成後に検証すれば3パーセントは仕組みで潰れます。A、Cは確率を下げるだけ、Eは要件（メッセージの言語に合わせる）を利用者に押し付けています。", "p": "決定的に判定できるものは、モデルの外で判定して検証する。"}, {"pat": "B: 構造 vs モデル任せ", "d": "D4", "q": "Legal requires that no personal data appears in the agent's output to a public facing channel. What should the architect implement?", "o": ["A model based classifier that reviews each response and rewrites it when it finds personal data", "A prompt instruction telling the model not to include personal data", "A weekly audit of a sample of outputs", "Deterministic detection and redaction on the output path before delivery, with the response blocked if detection fails", "Training for the team on what counts as personal data"], "a": [3], "e": "法的な絶対要件を確率的な仕組みで満たすことはできません。出力経路に決定的な検出と伏字を置き、判定できない場合は止める。Aはモデルによる検査で見逃しが残り、Bは指示、Cは事後です。", "p": "法的な絶対要件は、確率的な仕組みでは満たせない。"}, {"pat": "C: 保留 vs 早すぎる断定", "d": "D4", "q": "In the same week a team shipped a new retrieval index and rewrote the system prompt. The quality metric rose by 9 points. The sponsor asks which change produced the gain. What should the architect say?", "o": ["The retrieval index, since retrieval changes usually have the larger effect", "The prompt rewrite, since it was the more recent change", "The two changes are confounded, so neither can be credited from this data. Propose separating them, for example by reverting one in a controlled slice or by replaying the eval set against each change alone", "Both contributed roughly equally", "The question cannot be answered and does not need to be"], "a": [2], "e": "同時に入った二つの変更は分離できません。ここで求められているのは推測ではなく、分離する測り方の提案です。Dの折半は根拠のない数字を新たに作る行為、Eは測定を放棄しており、次の意思決定を支えられません。", "p": "交絡している効果は、断定も折半もせず、分離する測り方を出す。"}, {"pat": "C: 保留 vs 早すぎる断定", "d": "D4", "q": "An A/B test of a new prompt shows a 2 percent improvement in task success after 300 sessions per arm. The team wants to ship it. What should the architect say?", "o": ["Ship it, since the direction is positive and the change is low risk", "Do not ship it, since 2 percent is too small to matter", "Ship it to half of traffic and continue observing", "Re-run the test with a different metric", "A 2 point difference on 300 sessions per arm is not distinguishable from noise. Calculate the sample size needed for this effect size and either keep the test running or accept that the change is unproven"], "a": [4], "e": "効果量が小さいほど、必要なサンプル数は急激に増えます。300件で2パーセントは偶然の範囲であり、正の符号は証拠になりません。Bも誤りで、2パーセントが小さいかどうかは規模と文脈次第です。判断すべきは価値ではなく、測定の十分性です。", "p": "小さい効果ほど大きなサンプルが要る。符号だけで判断しない。"}, {"pat": "C: 保留 vs 早すぎる断定", "d": "D6", "q": "A pilot team reports 90 percent user satisfaction. The survey went to 400 users and 12 responded. The sponsor wants to put the number in a board update. What should the architect advise?", "o": ["Present the number with the sample size noted alongside it", "Present it as directional early feedback, and separately propose a measurement that does not depend on voluntary response, such as task completion rate or repeat usage from system data", "Present the number, since 90 percent is a strong signal regardless of sample size", "Do not report anything about satisfaction until the pilot ends", "Re-send the survey until the response rate reaches 50 percent"], "a": [1], "e": "3パーセントの回答率は、母集団ではなく「わざわざ答えた人」を測っています。満足した人ほど答える傾向があるため、数字は上振れします。注記を添えるだけでは、聞き手はやはり90パーセントを覚えます。自己選択に依存しない指標を並べて出すのが誠実な対応です。", "p": "回答率の低い調査は、母集団ではなく回答者の性質を測っている。"}, {"pat": "C: 保留 vs 早すぎる断定", "d": "D4", "q": "After a prompt change, the evaluation suite score moved from 84 to 83. The team wants to revert. What should the architect do first?", "o": ["Revert immediately, since the direction is negative", "Determine the run to run variance of the evaluation suite, then judge whether a 1 point move is distinguishable from that variance", "Add more test cases to the suite and re-run", "Keep the change, since 1 point is clearly noise", "Run the suite three more times and take the average"], "a": [1], "e": "1ポイントの変動を評価する前に、その評価スイート自体がどれだけばらつくのかを知らなければ判断できません。Dは結論としては正しいかもしれませんが、根拠を持たずに「ノイズだ」と断じている点でAと同じ誤りです。Eは有用ですが、まずばらつきを定量化するという目的を明示していません。", "p": "変化を判断する前に、測定器のばらつきを知る。"}, {"pat": "C: 保留 vs 早すぎる断定", "d": "D6", "q": "An executive asks whether the agent is better than a human analyst. What should the architect do first?", "o": ["Answer that it depends on the task", "Run the agent and a human analyst on the same 50 cases and compare accuracy", "Explain that such comparisons are not meaningful", "Establish what is being compared: which task, which quality metric, which human baseline under what conditions, and what decision the answer will drive. Then design the comparison around that", "Present the agent's evaluation score and let the executive judge"], "a": [3], "e": "「人間より優れているか」は、そのままでは測定不能な問いです。断る（C）のでも、いきなり比較を走らせる（B）のでもなく、比較対象と指標と用途を先に定義するのが正しい第一手です。Bは一見具体的ですが、50件で何を比べるかが未定義のまま走っています。", "p": "測定不能な問いは、断らずに測定可能な形へ定義し直す。"}, {"pat": "D: 前提の組み替え", "d": "D1", "q": "A business unit insists that the agent must answer every question a user might ask, including topics outside the knowledge base. Today the agent invents answers on those topics. What should the architect propose?", "o": ["Broaden retrieval to cover the additional topics so that the agent can answer them", "Accept the requirement and add a disclaimer to every response", "Refuse the requirement as technically impossible", "Use a larger model that knows more about the additional topics", "Reframe the requirement: define the scope the agent is accountable for, detect out of scope questions and hand them off gracefully, and measure the out of scope rate so the scope can be widened with evidence"], "a": [4], "e": "「あらゆる質問に答える」は要件ではなく願望です。答えられる範囲を定義し、範囲外を検出して引き渡し、その頻度を測って根拠を持って広げる。これが要件の組み替えです。Aは範囲が無限であるという前提を受け入れており、Cは全否定で前に進みません。", "p": "「すべてに答える」は要件ではない。範囲と引き渡しと測定に組み替える。"}, {"pat": "D: 前提の組み替え", "d": "D6", "q": "A stakeholder states that the system must reach 100 percent accuracy before launch. What should the architect propose?", "o": ["Agree, and delay the launch until the evaluation suite shows 100 percent", "Explain that 100 percent is impossible and propose 95 percent instead", "Reframe the discussion around error cost: classify the cases by what a mistake would cost and whether it can be undone, then set a different bar for each class and design controls where the cost is high", "Launch anyway, since no system reaches 100 percent", "Limit the launch to the cases the system already handles perfectly"], "a": [2], "e": "100パーセントという数字を値切る交渉（B）は、相手の懸念に答えていません。相手が本当に恐れているのは平均精度ではなく、特定の誤りが起きたときの損害です。誤りのコストと可逆性で分類し、クラスごとに基準と統制を設計するのが正しい組み替えです。", "p": "精度の要求は、誤りのコストと可逆性の議論に組み替える。"}, {"pat": "D: 前提の組み替え", "d": "D1", "q": "Users report that the assistant feels slow. The team proposes switching to a smaller model. What should the architect do first?", "o": ["Measure where the time actually goes: time to first token, generation time, retrieval time and each tool call, then target the largest contributor", "Switch to the smaller model and measure user perception afterwards", "Enable streaming so responses appear sooner", "Increase the infrastructure allocated to the service", "Reduce the maximum output length so responses complete faster"], "a": [0], "e": "「遅い」という報告から、モデルが原因だと決めつけています。実際には検索やツール呼び出しが支配的なことが多く、その場合モデルを小さくしても改善せず品質だけが落ちます。まず内訳を測るのが第一手です。Cは有効な手ですが、どこが遅いか分からないうちに選ぶ施策ではありません。", "p": "「遅い」は原因ではなく症状。内訳を測ってから手を選ぶ。"}, {"pat": "D: 前提の組み替え", "d": "D7", "q": "Developers complain that code generated with Claude Code often fails review. Management proposes restricting the tool to non production repositories. What should the architect propose?", "o": ["Accept the restriction, since review failures indicate the tool is not ready", "Examine what the review failures actually are. If they cluster in project conventions, testing requirements or dependency choices, encode those in a project level context file and in the review checklist, then re-measure", "Require developers to rewrite generated code by hand before submitting it", "Add a rule that generated code must be labeled in the pull request", "Provide additional training on prompting"], "a": [1], "e": "「レビューに落ちる」は原因ではなく結果です。落ちている理由が規約やテスト要件なら、それはプロジェクトの文脈が渡っていないという設計上の欠落であり、ツールの問題ではありません。原因を見ずに利用範囲を狭める（A）のは、症状への対処です。", "p": "ツールの問題に見える現象は、まず渡している文脈の欠落を疑う。"}, {"pat": "D: 前提の組み替え", "d": "D3", "q": "A business owner writes into the requirements that the agent must never be unavailable. What should the architect propose?", "o": ["Agree and design for multi region failover so that downtime is effectively zero", "Explain that no system can guarantee this and remove the requirement", "Add redundancy for every dependency in the chain", "Translate it into an availability objective with an error budget, define what the system does when a dependency fails, and agree which failures are visible to users and which are absorbed", "Commit to an availability number and add penalties if it is missed"], "a": [3], "e": "「絶対に落ちない」は達成も検証もできない要件です。目標値と誤差予算、そして依存先が落ちたときの縮退動作に翻訳することで、初めて設計と合意の対象になります。Bは正しい指摘ですが要件を消すだけで代案がなく、AとCはコストが青天井です。", "p": "絶対要件は、目標値と誤差予算と縮退動作に翻訳する。"}, {"pat": "A: 予防 vs 発見", "d": "D5", "q": "Select TWO. An internal agent can create service credentials for new environments. Which two controls should the architect require?", "o": ["Issue only short lived credentials scoped to the specific environment being created", "Log every credential creation and review the log weekly", "Require human approval before a credential with production scope is created", "Ask the model to explain why the credential is needed", "Send a notification to the security team after each creation"], "a": [0, 2], "e": "資格情報の発行は、有効期間と範囲を狭めること（予防）と、影響の大きいものに人の承認を挟むこと（予防）の二つで守ります。B、Eは発見的統制で、発行そのものは止まりません。Dはモデルの説明を求めるだけです。", "p": "予防的統制を二つ選ぶ。ログと通知は発見的統制。"}, {"pat": "B: 構造 vs モデル任せ", "d": "D3", "q": "Select TWO. An integration retries failed calls to a downstream service. Which two changes make the retry behavior safe?", "o": ["Increase the number of retries so that transient failures are always absorbed", "Use exponential backoff with jitter and honor any Retry-After header", "Log each retry attempt so failures can be investigated later", "Require the downstream operation to accept an idempotency key so that a duplicated call cannot duplicate the effect", "Alert the on call engineer when the retry count exceeds a threshold"], "a": [1, 3], "e": "リトライを安全にするのは、相手を押し潰さない再送間隔（バックオフとジッター）と、重複実行を吸収する冪等キーの二つです。Aは輻輳を悪化させます。C、Eは事後の可視化で、安全性そのものは変わりません。", "p": "リトライの安全性はバックオフと冪等性。ログと通知は安全性ではない。"}, {"pat": "C: 保留 vs 早すぎる断定", "d": "D4", "q": "Select TWO. A team is preparing a staged rollout of a reworked agent. Which two things must be defined before traffic is shifted?", "o": ["The percentage of traffic each stage will receive", "The names of the engineers who will monitor each stage", "The online metrics that will be watched and the threshold at which the rollout is automatically rolled back", "The expected improvement, so that the team knows what success looks like", "How long each stage runs, chosen so that enough sessions accumulate to distinguish the expected effect from noise"], "a": [2, 4], "e": "段階的ロールアウトが機能する条件は、悪化を自動で止められること（指標としきい値）と、良し悪しを判断できるだけのサンプルが貯まること（各段階の期間）です。Aは決めるべきですが、それだけでは判断も停止もできません。Dは期待値であって停止条件ではありません。", "p": "ロールアウトの必須要件は、自動ロールバック条件と、判断に足る観測期間。"}, {"pat": "D: 前提の組み替え", "d": "D6", "q": "Select TWO. A pilot agent is being handed to a business owner who has no engineering staff. Which two things should the architect insist on?", "o": ["A defined escalation path with a named engineering owner for failures the business team cannot resolve", "A commitment from the business owner to review all agent outputs", "A quarterly steering committee to discuss the agent's roadmap", "Training for the business team on prompt engineering", "A small set of health indicators the business team can read themselves, with a documented action for each one that goes out of range"], "a": [0, 4], "e": "エンジニアのいない受け手に渡すとき必要なのは、自分たちで読める少数の指標と、異常時に誰へ渡すかという経路です。Bは全件確認を求めるもので、自動化の価値を消し、やがて形骸化します。Dはプロンプト技術の教育であり、運用の自立とは別問題です。", "p": "非技術チームへの引き渡しは、読める指標と、名前のあるエスカレーション先。"}, {"pat": "B: 構造 vs モデル任せ", "d": "D3", "q": "An agent request passes through a gateway (30 second timeout), the agent service (60 second timeout) and a tool that calls a partner API (90 second timeout). Users see generic gateway errors while the tool is still working. What should the architect fix?", "o": ["Raise the gateway timeout to 120 seconds so the longest path fits", "Lower the partner API timeout to 20 seconds so it always returns first", "Set the timeout budget to decrease along the call chain, so that each inner call has less time than its caller, and return a meaningful error at the layer that ran out", "Add a retry at the gateway when a timeout occurs", "Move the partner API call into a background job"], "a": [2], "e": "内側の待ち時間が外側より長い構成は、必ず外側から先に切れます。タイムアウトは呼び出しの深さに沿って短くしていくのが原則です。Aは全体を延ばすだけで順序の逆転は残り、Bは正常な処理まで切ります。Eは有効な設計ですが、この問題の原因はタイムアウトの順序です。", "p": "タイムアウトは外側ほど長く、内側ほど短く。逆転していると原因が隠れる。"}, {"pat": "A: 予防 vs 発見", "d": "D3", "q": "A partner system delivers results to the company by webhook. The partner guarantees at least once delivery. The receiving service currently creates a record for every webhook it receives. What should the architect require?", "o": ["Make the receiver idempotent by keying on the event id the partner supplies, so that a redelivered event does not create a second record", "Ask the partner to guarantee exactly once delivery", "Deduplicate the records nightly with a batch job", "Reject webhooks that arrive within one minute of an identical payload", "Acknowledge the webhook faster so the partner does not redeliver"], "a": [0], "e": "at-least-once とは重複が来るという契約です。受け手を冪等にするのが唯一の正しい対応で、Bは分散システムでは実現できない保証を求めています。Cは事後の後始末で、その間に下流が二重の記録を読みます。Dは時間窓の推測に依存し、遅延した再送を取りこぼします。", "p": "at-least-once の相手には、受け手を冪等にする。exactly-once は求めない。"}, {"pat": "D: 前提の組み替え", "d": "D3", "q": "A workflow has three steps: extracting fields from short forms, summarizing long case files and drafting customer replies. All three currently run on the same large model and the monthly bill is above budget. What should the architect propose?", "o": ["Reduce the number of requests by batching the three steps into one prompt", "Move all three steps to the smallest available model and accept the quality drop", "Negotiate volume pricing before changing the architecture", "Cache the model responses so repeated cases cost less", "Evaluate each step separately and route it to the smallest model that meets that step's quality bar, keeping the large model only where the evaluation shows it is needed"], "a": [4], "e": "「どのモデルを使うか」は工程ごとの判断であり、システム全体で一つに決める必要はありません。工程別に品質基準を測り、満たす最小のモデルへ振り分けます。Bは測定なしに品質を捨て、Aは三つの異なる作業を一つのプロンプトに混ぜて品質と評価可能性の両方を落とします。", "p": "モデル選択は工程ごと。全体で一つに決める前提を疑う。"}, {"pat": "B: 構造 vs モデル任せ", "d": "D3", "q": "A team wants to use prompt caching on an agent whose request contains, in this order: tool definitions, a system prompt, a 40,000 token product catalog, the conversation history and the new user message. The catalog changes once a week. Where should the cache breakpoint go?", "o": ["Before the tool definitions, so everything is cached", "After the product catalog, so that the tool definitions, system prompt and catalog form the cached prefix and only the conversation and new message vary", "After the conversation history, so that as much as possible is cached", "Before the new user message only", "Caching will not help because the catalog changes weekly"], "a": [1], "e": "キャッシュは前方一致なので、区切りは「安定した部分の直後」に置きます。ツール定義、システムプロンプト、カタログまでが安定領域で、会話と新規メッセージが可変領域です。Cは会話履歴まで含めるため毎回ずれてヒットしません。Eは誤りで、週1回の変更なら1週間ヒットし続けます。", "p": "キャッシュ区切りは安定領域の直後。会話履歴より前に置く。"}, {"pat": "C: 保留 vs 早すぎる断定", "d": "D3", "q": "A team wants to change the system prompt of a live agent that handles 20,000 conversations a day. The change looks clearly better in offline evaluation. What deployment approach should the architect require?", "o": ["Deploy at a low traffic hour so fewer users are affected if it goes wrong", "Deploy to a staging environment for a week with replayed production traffic", "Deploy to everyone and monitor the dashboards closely for the first hour", "Deploy to a small percentage of live conversations, compare predefined online metrics against the unchanged group, and roll back automatically if the threshold is breached", "Deploy behind a feature flag that individual users can turn on themselves"], "a": [3], "e": "プロンプトの変更は本番の挙動を変える変更であり、コードのデプロイと同じ扱いが必要です。一部トラフィックで比較対象と並走させ、しきい値で自動的に戻す。Aは被害を減らすだけで検証になっていません。Eは自己選択した利用者だけが使うため、比較として偏ります。", "p": "プロンプト変更もデプロイ。比較群と自動ロールバックを付ける。"}, {"pat": "A: 予防 vs 発見", "d": "D3", "q": "An agent loop is failing intermittently in production and the team cannot reproduce it. Today the service logs only the final response and any exception. What should the architect instrument first?", "o": ["The CPU and memory usage of the agent service", "The full text of every user message and model response", "Each iteration of the loop: which tool was called with which arguments, what it returned, how long it took, and the stop reason of each model turn, correlated by a request id", "The number of requests per minute and the error rate", "A sampling of conversations replayed nightly against the current version"], "a": [2], "e": "エージェントの障害は、ループのどこで何が起きたかが見えないと再現できません。ツール呼び出しの引数、戻り値、所要時間、停止理由を1リクエストIDで追えるようにするのが最初の一手です。Bは全文保存で個人情報の問題を作り、Dは症状の集計であって原因に届きません。", "p": "エージェントの可観測性は、ループ1周ごとの記録。集計値では原因に届かない。"}, {"pat": "B: 構造 vs モデル任せ", "d": "D3", "q": "A tool that queries an inventory service sometimes fails. Today the tool returns an empty result when the service is down. The agent then tells users the item is out of stock. What should the tool return instead?", "o": ["A structured error indicating that the inventory service is unavailable, so that the agent can distinguish a failure from a genuine zero result and say so", "The last known inventory value from cache", "A retry instruction that the model can act on", "Nothing, so that the model does not mention inventory at all", "A random delay followed by a second attempt inside the tool"], "a": [0], "e": "失敗と「0件」を同じ形で返すと、モデルは区別できず誤った断定をします。ツールは失敗を失敗として構造化して返すべきです。Bは古い値を現在の在庫として提示することになり、より危険です。Dは無言のまま別の誤りを招きます。", "p": "ツールの失敗と「該当なし」を同じ形で返さない。区別可能にする。"}, {"pat": "A: 予防 vs 発見", "d": "D3", "q": "A single agent deployment serves users in the EU and in the US. Legal states that EU customer data must be processed within the EU. The team proposes adding a note in the system prompt telling the model not to send EU data outside the EU. What should the architect say?", "o": ["The note is sufficient if it is worded clearly", "Add a check in the application that inspects the response for EU data", "Encrypt the data in transit so that the location no longer matters", "Ask legal whether the requirement can be relaxed for this use case", "Data residency is a routing and infrastructure requirement, not a model instruction. Route EU traffic to an EU deployment and keep the data path inside that region"], "a": [4], "e": "データの所在は物理的な事実であり、モデルへの指示で変えられるものではありません。EUのトラフィックをEUの基盤へ振り分け、経路全体を域内に収めるのが唯一の対応です。Cは暗号化しても処理場所は変わりません。この選択肢群は「モデルに指示すれば統制になる」という誤解を正面から突いています。", "p": "データ所在は基盤とルーティングの問題。プロンプトでは満たせない。"}], DOMS={"D1": "ソリューション設計", "D2": "モデル/プロンプト/コンテキスト", "D3": "統合とデプロイ", "D4": "評価・テスト・最適化", "D5": "ガバナンス/安全/リスク", "D6": "ステークホルダー/ライフサイクル", "D7": "開発者生産性"};
+var KEY="ccarp_p32_v1", FSKEY="ccarp_fs32";
+var ST={}; try{ST=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){ST={};}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ST));}catch(e){}}
+var K=1.15; try{var kk=parseFloat(localStorage.getItem(FSKEY)); if(kk)K=kk;}catch(e){}
+document.documentElement.style.setProperty("--k",K);
+function setK(d){K=Math.min(1.8,Math.max(.9,Math.round((K+d)*100)/100));
+ document.documentElement.style.setProperty("--k",K);
+ try{localStorage.setItem(FSKEY,K);}catch(e){}}
+
+var PATS=[]; for(var i=0;i<Q.length;i++) if(PATS.indexOf(Q[i].pat)<0) PATS.push(Q[i].pat);
+PATS.sort();
+var filt="ALL", idx=[], ci=0, view="q";
+function build(){ idx=[];
+ for(var i=0;i<Q.length;i++){
+  if(filt==="ALL") idx.push(i);
+  else if(filt==="NG"){ var s=ST[i]; if(s&&!s.ok) idx.push(i); }
+  else if(filt==="NGF"){ var s=ST[i]; if(s&&!s.first) idx.push(i); }
+  else if(filt.charAt(0)==="P"){ if(Q[i].pat===PATS[parseInt(filt.slice(1),10)]) idx.push(i); }
+  else if(Q[i].d===filt) idx.push(i); }
+ if(idx.length===0) idx=[0];
+ if(ci>=idx.length) ci=0; }
+function multi(q){return q.a.length>1;}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+var LT="ABCDE";
+function cnt(f){var n=0;for(var i=0;i<Q.length;i++){var s=ST[i];if(s&&f(s))n++;}return n;}
+function nDone(){var n=0;for(var i=0;i<Q.length;i++)if(ST[i])n++;return n;}
+
+function vQ(){
+ var gi=idx[ci], q=Q[gi], s=ST[gi], sel=s?s.sel:(ST["_t"+gi]||[]);
+ var d=nDone(), pct=Math.round(d/Q.length*100);
+ var h='<div class="bar"><div class="in"><div class="pb"><i style="width:'+pct+'%"></i></div>'+
+  '<span class="pos">'+d+'/'+Q.length+'</span>'+
+  '<button class="btn g sm" onclick="view=\'menu\';R()">メニュー</button></div></div><div class="pad"></div>';
+ h+='<div class="wrap"><span class="dm">'+q.d+' '+DOMS[q.d]+'</span>';
+ h+='<span class="pt2">'+esc(q.pat)+'</span>';
+ if(multi(q)) h+='<span class="tag">SELECT '+q.a.length+'</span>';
+ h+='<div class="stem">'+esc(q.q)+'</div>';
+ for(var j=0;j<q.o.length;j++){
+  var c="";
+  if(s){ if(q.a.indexOf(j)>=0) c=" ok"; else if(sel.indexOf(j)>=0) c=" ng"; }
+  else if(sel.indexOf(j)>=0) c=" sel";
+  h+='<div class="opt'+c+'"'+(s?'':' onclick="pick('+j+')"')+'>'+
+     '<span class="L">'+LT[j]+'</span>'+esc(q.o[j])+'</div>';
+ }
+ if(!s && multi(q)) h+='<p class="sub">'+q.a.length+'つ選んでください（現在 '+sel.length+' つ）</p>';
+ if(s){
+  h+='<div class="vd '+(s.ok?"o":"x")+'">'+(s.ok?"○ 正解":"× 不正解")+'</div>';
+  h+='<div class="hist">初回：'+(s.first?"○ 正解":"× 不正解")+' ／ 挑戦 '+s.n+' 回'+
+     (s.first?'':'（初回の記録は保持されます）')+'</div>';
+  h+='<div class="exp">'+esc(q.e)+'<div class="pt">→ '+esc(q.p)+'</div></div>';
+  h+='<button class="btn g sm" onclick="again('+gi+')">もう一度解く</button>';
+ }
+ h+='</div>';
+ h+='<div class="nav"><div class="in">'+
+    '<button class="btn g sm" onclick="mv(-1)"'+(ci===0?" disabled":"")+'>← 前</button>'+
+    '<span class="sp"></span><span class="pos">'+(ci+1)+' / '+idx.length+'</span><span class="sp"></span>'+
+    '<button class="btn" onclick="mv(1)"'+(ci===idx.length-1?" disabled":"")+'>次 →</button>'+
+    '</div></div>';
+ document.getElementById("app").innerHTML=h;
+}
+function pick(j){
+ var gi=idx[ci], q=Q[gi];
+ var tmp=(ST["_t"+gi]||[]).slice(), k=tmp.indexOf(j);
+ if(multi(q)){ if(k>=0)tmp.splice(k,1); else { if(tmp.length>=q.a.length)tmp.shift(); tmp.push(j);} }
+ else tmp=[j];
+ ST["_t"+gi]=tmp;
+ if(tmp.length===q.a.length){
+  var b=tmp.slice().sort(), c=q.a.slice().sort(), ok=true;
+  for(var m=0;m<b.length;m++) if(b[m]!==c[m]) ok=false;
+  var prev=ST["_h"+gi];
+  if(!prev){ prev={first:ok,n:0}; ST["_h"+gi]=prev; }
+  prev.n++;
+  ST[gi]={sel:tmp.slice(), ok:ok, first:prev.first, n:prev.n};
+  delete ST["_t"+gi];
+ }
+ save(); R();
+}
+function again(gi){ delete ST[gi]; delete ST["_t"+gi]; save(); R(); }
+function mv(d){ ci=Math.min(idx.length-1,Math.max(0,ci+d)); window.scrollTo(0,0); R(); }
+
+function vMenu(){
+ var d=nDone(), ok=cnt(function(s){return s.ok;}), f=cnt(function(s){return s.first;});
+ var h='<div class="wrap"><h1>CCAR-P 弱点特化 第2版 32問</h1>'+
+  '<p class="sub">weak30 の誤答傾向から、失点の型（4パターン）ごとに新規作成。D3を13問、未計測だったD1/D2/D4も含みます。正解位置はA〜Eに分散。</p>';
+ h+='<div class="note"><b>初回正答率が本当の実力です。</b>「もう一度解く」で解き直しても、初回の結果は保持され上書きされません。下の初回正答率だけを見て判断してください。</div>';
+ h+='<div class="card"><div class="big">'+(d?Math.round(f/d*100):0)+'%</div>'+
+    '<p class="sub" style="margin:0">初回正答 '+f+' / '+d+' 問（解答済 '+d+' / '+Q.length+'）<br>'+
+    '現在の状態での正答 '+ok+' 問</p></div>';
+ var by={};
+ for(var i=0;i<Q.length;i++){ var dm=Q[i].d; by[dm]=by[dm]||[0,0,0]; by[dm][2]++;
+  if(ST[i]){ by[dm][1]++; if(ST[i].first) by[dm][0]++; } }
+ h+='<h2>ドメイン別（初回）</h2><table><tr><th>ドメイン</th><th class="r">初回正答</th><th class="r">率</th></tr>';
+ var ks=Object.keys(by).sort();
+ for(var x=0;x<ks.length;x++){ var b=by[ks[x]];
+  h+='<tr><td>'+ks[x]+' '+DOMS[ks[x]]+'</td><td class="r">'+b[0]+'/'+b[1]+' ('+b[2]+')</td>'+
+     '<td class="r">'+(b[1]?Math.round(b[0]/b[1]*100)+'%':'-')+'</td></tr>'; }
+ h+='</table>';
+ var bp={};
+ for(var i=0;i<Q.length;i++){ var pp=Q[i].pat; bp[pp]=bp[pp]||[0,0,0]; bp[pp][2]++;
+  if(ST[i]){ bp[pp][1]++; if(ST[i].first) bp[pp][0]++; } }
+ h+='<h2>失点パターン別（初回）</h2><table><tr><th>パターン</th><th class="r">初回正答</th><th class="r">率</th></tr>';
+ var kp=Object.keys(bp).sort();
+ for(var x=0;x<kp.length;x++){ var b=bp[kp[x]];
+  h+='<tr><td>'+kp[x]+'</td><td class="r">'+b[0]+'/'+b[1]+' ('+b[2]+')</td>'+
+     '<td class="r">'+(b[1]?Math.round(b[0]/b[1]*100)+'%':'-')+'</td></tr>'; }
+ h+='</table>';
+ h+='<h2>絞り込み</h2><div class="row">';
+ var fs=[["ALL","全32問"],["D3","D3 (13)"],["D4","D4 (6)"],["D6","D6 (4)"],
+         ["D1","D1 (3)"],["D5","D5 (3)"],["D2","D2 (2)"],["D7","D7 (1)"],
+         ["NGF","初回に間違えた問題"],["NG","現在の誤答"]];
+ for(var x=0;x<fs.length;x++)
+  h+='<button class="btn g sm'+(filt===fs[x][0]?" on":"")+'" onclick="setF(\''+fs[x][0]+'\')">'+fs[x][1]+'</button>';
+ for(var x=0;x<PATS.length;x++)
+  h+='<button class="btn g sm'+(filt==="P"+x?" on":"")+'" onclick="setF(\'P'+x+'\')">'+PATS[x]+'</button>';
+ h+='</div>';
+ h+='<h2>一覧</h2><div class="grid">';
+ for(var i=0;i<Q.length;i++){ var s=ST[i];
+  var c=""; if(s){ c=s.first?" ok":" ng"; if(!s.first&&s.ok) c+=" fx"; }
+  h+='<div class="gc'+c+'" onclick="jump('+i+')">'+(i+1)+'</div>'; }
+ h+='</div><p class="sub">緑=初回正解／赤=初回不正解（下辺が緑なら解き直して正解済み）</p>';
+ h+='<div class="card"><div class="row"><span class="sub" style="margin:0">文字サイズ</span>'+
+    '<span class="fs"><button onclick="setK(-0.1)">A-</button> <button onclick="setK(0.1)">A+</button></span>'+
+    '<span class="sp"></span><button class="btn g sm" onclick="rst()">記録を消去</button></div></div>';
+ h+='<div style="margin:16px 0 40px"><button class="btn" onclick="view=\'q\';R()">問題に戻る</button></div></div>';
+ document.getElementById("app").innerHTML=h;
+}
+function setF(f){filt=f;ci=0;build();view="q";window.scrollTo(0,0);R();}
+function jump(i){filt="ALL";build();ci=idx.indexOf(i);if(ci<0)ci=0;view="q";window.scrollTo(0,0);R();}
+function rst(){if(!confirm("初回記録を含むすべての解答記録を消去します。よろしいですか？"))return;ST={};save();build();R();}
+function R(){build(); if(view==="menu") vMenu(); else vQ();}
+build(); R();
+</script></body></html>
