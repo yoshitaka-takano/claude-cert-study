@@ -34,6 +34,9 @@ white-space:nowrap}
 color:var(--mu);border-radius:8px;padding:3px 9px;font-size:calc(12px*var(--k));cursor:pointer;
 font-family:inherit;line-height:1.3}
 .spk:hover{border-color:var(--ac);color:var(--ac)}
+.qrow{margin:12px 0 2px}
+.spk.big{float:none;margin:0;padding:8px 14px;font-size:calc(13px*var(--k));
+font-weight:700;border-color:var(--ac);color:var(--ac);background:#241812}
 .opt.now{border-color:#6b8fd6;box-shadow:inset 0 0 0 1px #6b8fd6}
 .stem.now{background:#1a2430;border-radius:9px;padding:10px 12px;margin-left:-12px;margin-right:-12px}
 .pb{height:5px;background:var(--pn2);border-radius:3px;overflow:hidden;flex:1;min-width:60px}
@@ -163,7 +166,8 @@ function markEl(m){
 }
 function speakItems(items){
   if(!SP){ alert("このブラウザは読み上げに対応していません。"); return; }
-  sq=[];
+  var plang = (items.length && items[0].lang==="ja") ? "ja" : "en";
+  sq=[{t:(plang==="ja"?"解説。":"Ready."),lang:plang,mark:null,tries:0,prime:true}];
   for(var i=0;i<items.length;i++){
     var cs=chunkText(items[i].t);
     for(var j=0;j<cs.length;j++)
@@ -279,6 +283,7 @@ function vQ(){
  h+='<div class="wrap"><span class="dm">'+q.d+' '+DOMS[q.d]+'</span>';
  if(s) h+='<span class="pt2">'+esc(q.pat)+'</span>';
  if(multi(q)) h+='<span class="tag">SELECT '+(q.a.length===3?"THREE":"TWO")+'</span>';
+ h+='<div class="qrow"><button class="spk big" onclick="readStem()">&#128266; 設問を読む</button></div>';
  h+='<div class="stem" id="stem">'+esc(q.q)+'</div>';
  for(var j=0;j<q.o.length;j++){
   var c="";
